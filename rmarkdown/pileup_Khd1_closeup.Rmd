@@ -1,0 +1,355 @@
+---
+title: "Pileup Plots for Khd1 analysis"
+author: Chong Jing Qi
+output: html_document
+---
+
+## Summary
+Generates pileup plot for Khd1 CRAC data on specific regions of specific Khd1 target genes that are specified in `~/CRAC_analysis_2022/input_annotation/Khd1_TargetGeneNamesOnly.txt`. These show detailed profiles of read counts, including nucleotide-specific mutations and deletions, along selected transcripts.
+
+This script relies on "pileup" files in tab-separated text format produced by `pyPileup` script while running the pipeline, put in the directory `~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/`. So it must be run after the nf_CRACpipeline, CNN the repository `README.md` for details.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache= TRUE,
+                      cache.path = "cache/pileup_Khd1-",
+                      fig.path = "figure/pileup_Khd1-")
+library(ggplot2)
+library(readr)
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(stringr)
+library(cowplot)
+theme_set(theme_cowplot(font_size = 11) + 
+              theme(strip.background = element_blank()) 
+          )
+##dir.create("./khd1_SRR847751/figure_pileup")
+```
+
+## Functions for data loading and plotting
+
+```{r pileup_functions}
+read_pileuptxt <- function(file,converturidine=FALSE) {
+    pileupdf <- readr::read_tsv(file = file,
+                    comment = "#",
+                    col_types = "cifiii",
+                    col_names = c("target","position","nucleotide",
+                                  "hits","substitutions","deletions")
+    )
+    if (converturidine) {
+        pileupdf <- mutate(pileupdf,
+                           nucleotide = fct_recode(nucleotide, U = "T") )
+    }
+    pileupdf
+}
+
+scale_fill_pileup <- function(...) {
+    scale_fill_manual(values = c(aligned = "grey50",
+                                 substitutions = "black",
+                                 deletions = "red2"),
+                      ...)
+}
+
+plot_pileup_one <- function(pileupdf, 
+                            include = "allonly",
+                            nucseq = FALSE, 
+                            nuctxtsize = 2.8) {
+    p_pileup <- ggplot(data = pileupdf, aes(x=position)) +
+        coord_cartesian(expand = FALSE, clip = "off")
+    if (include == "allonly") {
+        p_pileup <- p_pileup + 
+            geom_col(aes(y = hits))
+    } else if (include == "allsub") {
+        p_pileup <- p_pileup + 
+            geom_col(aes(y = hits,
+                         fill = "aligned")) +
+            geom_col(aes(y = substitutions,
+                         fill = "substitutions")) 
+    } else if (include == "alldel") {
+        p_pileup <- p_pileup + 
+            geom_col(aes(y = hits,
+                         fill = "aligned")) + 
+            geom_col(aes(y = deletions,
+                         fill = "deletions"))
+    } else if (include == "allsubdel") {
+        # this is a hack that prints substitutions behind deletions
+        # so that total height is added, it looks "stacked".
+        # There would be a better way of doing it with reshaping and
+        # position = "stack".
+        p_pileup <- p_pileup + 
+            geom_col(aes(y = hits,
+                         fill = "aligned"))  +
+            geom_col(aes(y = substitutions + deletions,
+                         fill = "substitutions")) + 
+            geom_col(aes(y = deletions,
+                         fill = "deletions"))  + 
+            scale_fill_pileup("Hit type")
+    }
+    
+    if (nucseq) {
+        p_pileup <- p_pileup + 
+            geom_text(aes(label = nucleotide),
+                      y = 0, family = 'Courier', vjust = 1.1,
+                      size = nuctxtsize) +
+            theme(axis.title.x =  element_blank(),
+                  axis.line.x = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.ticks.x = element_blank()) +
+            expand_limits(y = - max(pileupdf$hits / 16 ) )
+    }
+    p_pileup
+}
+
+plot_pileuphits_line <- function(pileupdf) {
+    ggplot(data = pileupdf, 
+           aes(x=position, y = hits)) +
+        coord_cartesian(expand = FALSE) + 
+        geom_line(aes(y = hits))
+}
+
+plot_nucseq <- function(nucdf) {
+    # fix the width
+    ggplot(data = nucdf, aes(x = position, label = nucleotide) ) +
+        geom_text(y=0,family='Courier') + 
+        theme_nothing()
+}
+
+position_locate_all <- function(posdf,
+                                pattern = "C[ACUG][ACUG]C[ACUG][ACUG]C[ACUG][ACUG]") {
+    posdf$nucleotide %>%
+        as.character() %>%
+        paste(collapse = "") %>%
+        stringr::str_locate_all(pattern) %>%
+        .[[1]]
+}
+
+CNN_colour <- "#3fa6b0"
+Cross_linking_colour <- "#ea1111"
+
+geom_motifhighlightpt <- function(...) {
+    geom_point(y=0, aes(x=mid), colour = CNN_colour, size = 3, shape = 17, vjust = 1,
+               ...)
+}
+
+annotate_motifhighlightsegment <- function(mid,halfwidth=3.5) {
+    annotate(y=0, yend = 0, x = mid-halfwidth, xend=mid+halfwidth,
+             geom="segment", colour = CNN_colour, size = 2)
+}
+
+annotate_motifhighlight <- function(mid,...) {
+    annotate(geom="text", size = 3, y = 0, x = mid, vjust = 0.9, fontface = "bold",
+             ...)
+}
+
+annotate_CNN <- function(mid, ...) {
+    annotate_motifhighlight(mid, label = "m", colour = CNN_colour, ...)
+}
+
+annotate_CS <- function(mid, ...) {
+    annotate_motifhighlight(mid, label = "CS", colour = Cross_linking_colour, ...)
+}
+
+```
+
+## Load khd1_SRR847751 sample for analysis
+
+```{r load_onetable}
+# setwd("~/Repos/Ssd1_CRACanalysis_2020/rmarkdown")
+
+Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt",converturidine = TRUE)
+Khd1_SRR847751_filtered_5_df <- Khd1_SRR847751_df %>%
+  mutate(percent_del = (deletions / hits) * 100) %>%
+  filter( hits > 100, percent_del > 5)
+```
+##Generate table containing the genes exceeding the threshold
+```{r generate table}
+Khd1_targetted_genes <- data.frame((unique(sort(Khd1_SRR847751_filtered_5_df$target))))
+```
+
+##ASH1
+## Plot pileup along ASH1 transcript as a line
+
+```{r plot_ASH1line,dependson = c("pileup_functions","load_onetable"),fig.height = 2,fig.width=4}
+plot_pileuphits_line(filter(Khd1_SRR847751_df, target == "ASH1") )
+```
+## Plot pileup focus on peaks ASH1
+
+```{r plot_ASH1focus,dependson = c("pileup_functions","load_onetable"),fig.height = 1,fig.width=4}
+ASH1wide_df <- filter(Khd1_SRR847751_df, 
+                         target == "ASH1", 
+                         position >= 800, 
+                         position <= 886)
+
+ASH1wide_plot <- plot_pileup_one(ASH1wide_df, include = "allsubdel") + 
+    labs(title = "ASH1 , pileup plot") +
+    annotate_CS(filter(Khd1_SRR847751_filtered_5_df,target=="ASH1")$position)
+ASH1wide_plot
+ggsave(plot = ASH1wide_plot, filename = "../khd1_SRR847751/figure_pileup/ASH1_800_886_plot.pdf",
+       height = 3, width=6, device = "pdf")
+```
+
+
+## Plot pileup focus on ASH1 specific coding region, restricted to "ASH1_duo" vicinity
+
+```{r plot_ASH1seq,dependson = c("pileup_functions","load_onetable"),fig.height = 1, fig.width=6}
+ASH1seq_df <- filter(Khd1_SRR847751_df, 
+                      target == "ASH1", 
+                      position >= 800, 
+                      position <= 886)
+ASH1seq_plot <- plot_pileup_one(ASH1seq_df, 
+                                   include = "allsubdel", 
+                                   nucseq = TRUE, nuctxtsize = 2) + 
+    labs(title = "ASH1 pileup plot")
+ASH1dual_plot
+ggsave(plot = ASH1dual_plot, filename = "./khd1_SRR847751/figure_pileup/ASH1_plot.pdf",
+       height = 1, width=6, device = "pdf")
+```  
+
+##SRL1
+## Plot pileup along SRL1 transcript as a line
+
+```{r plot_SRL1line,dependson = c("pileup_functions","load_onetable"),fig.height = 2,fig.width=4}
+plot_pileuphits_line(filter(Khd1_SRR847751_df, target == "SRL1") )
+```
+
+## Plot pileup focus on peaks SRL1
+
+```{r plot_SRL1focus,dependson = c("pileup_functions","load_onetable"),fig.height = 1,fig.width=4}
+SRL1_df <- filter(Khd1_SRR847751_df, 
+                         target == "SRL1", 
+                         position >= 580, 
+                         position <= 660)
+
+SRL1_plot <- plot_pileup_one(SRL1_df, include = "allsubdel",nucseq = TRUE ) + 
+    labs(title = "SRL1 pileup plot")
+SRL1_plot
+ggsave(plot = SRL1_plot, filename = "./khd1_SRR847751/figure_pileup/SRL_plot.pdf",
+       height = 3, width=7, device = "pdf")
+```
+## Plot pileups centred only on Khd1-enriched motifs
+
+Plot pileup on same area surrounding the CNN motifs (-12, +2) to look for consistent location of crosslinking sites.
+
+```{r CNN_positions_all,dependson = c("pileup_functions","load_onetable"),fig.height = 8, fig.width = 8}
+CNN_positions_all <- position_locate_all(Khd1_SRR847751_df) %>%
+    as_tibble() %>%
+    mutate(motifid = 1:nrow(.))
+
+get_chunk <- function(sedf,datadf) {
+    datadf[sedf$start : sedf$end,]
+}
+
+CNN_motif_pileups <- 
+    CNN_positions_all[-1,] %>%
+    mutate(start = start - 12, end=end + 2) %>%
+    group_by(motifid) %>%
+    do(get_chunk(., datadf = Khd1_SRR847751_df)) %>%
+    mutate(motifidg = paste(target, motifid),
+           maxhits = max(hits)) %>%
+    filter(maxhits > 150)
+
+CNN_motif_pileups %>%
+    do(plot = plot_pileup_one(.,include = "allsubdel",
+                              nucseq = TRUE,nuctxtsize = 2) +
+        theme(legend.position = "none") + 
+           labs(title = .$motifidg[1])) %>%
+    .$plot %>%
+    plot_grid(plotlist = .)
+# CNN_motifs
+```
+
+We are likely to detect crosslinking by apparent deletions in U-rich regions 1-4nt upstream of CNYUCNYU. However, because these are often U(4), or in some cases (CU)(2), the data do not tell us exactly which nucleotide position is crosslinked.
+
+## Find CNN motif positions separately for each transcript
+
+```{r CNN_positions_bytx,dependson = c("pileup_functions","load_onetable"),fig.height = 8, fig.width = 8}
+CNN_positions_bytx <- Khd1_SRR847751_df %>%
+    group_by(target) %>%
+    do(., position_locate_all(.) %>% as_tibble() ) %>%
+    mutate(mid = start + 3.5)
+CNN_positions_bytx
+
+```
+```{r plot_ASH1_reproducibility}
+ASH1_widerep_df <- filter(Khd1_SRR847751_df, 
+                         target == "ASH1", 
+                         position >= 800, 
+                         position <= 900)
+
+ASH1_widerep_plot <- 
+    plot_pileup_one(ASH1_widerep_df, include = "allsubdel", nucseq = TRUE, nuctxtsize = 2 ) + 
+    labs(title = "ASH1 peak", x = "position from TSS")  +
+    xlim(800,900) +
+    annotate_CNN(filter(CNN_positions_bytx,target=="ASH1",mid < 1500)$mid) +
+    annotate_CS(filter(Khd1_SRR847751_filtered_df,target=="ASH1")$position)
+ASH1_widerep_plot
+
+ ggsave(plot = ASH1_widerep_plot, 
+        filename = "./khd1_SRR847751/figure_pileup/ASH1_reproducible_plot.pdf",
+        height = 4, width = 6, device = "pdf")
+```
+
+## Plot pileup on UTH1 5'UTR to show reproducibility
+
+```{r plot_UTH1_reproducibility}
+UTH1_5UTRwiderep_df <- filter(Ssd1_allsamples_df, 
+                         target == "UTH1", 
+                         position >= 1, 
+                         position <= 300)
+
+UTH1_5UTRwiderep_plot <- 
+    plot_pileup_one(UTH1_5UTRwiderep_df, include = "allsubdel") + 
+    facet_wrap(~SampleNice, ncol = 1, scales = "free_y") + 
+    labs(title = "UTH1 5'UTR peaks", x = "position from TSS") +
+    annotate_CNN(filter(CNN_positions_bytx,target=="UTH1",mid < 300)$mid) +
+    annotate_CCAACU(filter(CCAACU_positions_bytx,target=="UTH1",mid < 300)$mid)
+UTH1_5UTRwiderep_plot
+
+# ggsave(plot = UTH1_5UTRwiderep_plot, 
+#        filename = "UTH1_5wide_reproducible_plot.pdf",
+#        height = 4, width = 6, device = "pdf")
+```
+
+## Plot focused on UTH1 CNYUCNYU vicinity
+
+```{r plot_UTH1_focus,fig.height = 2, fig.width = 10}
+UTH1_5UTRwideone_plot <- 
+    filter(UTH1_5UTRwiderep_df, Sample == "3_30" ) %>%
+    plot_pileup_one(include = "allsubdel",nucseq = TRUE) + 
+    labs(title = "UTH1 5'UTR peaks, 30C rep A", x = "position from TSS") + 
+    theme(legend.position = c(0.9,0.7))
+UTH1_5UTRwideone_plot
+
+# ggsave(plot = UTH1_5UTRwideone_plot, 
+#        filename = "UTH1_5wide_3_30_plot.pdf",
+#        height = 2, width = 12, device = "pdf")
+```
+
+## Composite plot 
+
+Output to `./khd1_SRR847751/figure_pileup/Ssd1_pileup_plot_reproducible_4genes.pdf`.
+
+```{r pileup_plot_reproducible_4genes, fig.width=7, fig.height=7}
+theme_5UTR_grid <-  theme(legend.position="none",
+                          axis.ticks.length = unit(5,"pt") )
+pileup_plot_reproducible_4genes <-
+    plot_grid(SUN4_5UTRwiderep_plot + theme_5UTR_grid, 
+          SCW4_5UTRwiderep_plot + theme_5UTR_grid, 
+          UTH1_5UTRwiderep_plot + theme_5UTR_grid, 
+          SRL1_5UTRwiderep_plot + theme_5UTR_grid
+          )
+pileup_plot_reproducible_4genes
+
+ggsave(plot = pileup_plot_reproducible_4genes, 
+       filename = "./figure_pileup/Ssd1_pileup_plot_reproducible_4genes.pdf",
+       height = 7, width = 7, device = "pdf")
+```
+
+
+## Session Info
+
+Package versions, etc., that ran this file.
+
+```{r session_info,results="show",message=TRUE}
+sessionInfo()
+```

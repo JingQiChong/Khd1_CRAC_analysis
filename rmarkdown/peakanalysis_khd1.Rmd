@@ -1,0 +1,192 @@
+---
+title: "Peak analysis of Khd1/Hek2 CRAC data"
+output: html_document
+---
+#Summary
+Will be added soon
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+library(tidyverse)
+library(magrittr)
+library(cowplot)
+theme_set(theme_cowplot(font_size=11))
+
+library(rtracklayer)
+library(Biostrings)
+
+data_output_dir <- "./Khd1_SRR847751/MEME/"
+
+read_FDR_gff <- function(file){
+    # tidyverse read gff function from rmonad vignette
+    # https://cran.r-project.org/web/packages/rmonad/vignettes/gff-processing.html
+    readr::read_tsv(
+        file,
+        col_names = c(
+            "chromosome",
+            "feature",
+            "source",
+            "start",
+            "end",
+            "peak_height",
+            "strand",
+            "FDR",
+            "attributes"
+        ),
+        na        = ".",
+        comment   = "#",
+        col_types = "ccciidcnc"
+    ) %>% 
+        mutate(ID=attributes %>% 
+                   str_extract('gene_id \"[\\w.-]+\"') %>% 
+                   str_sub(start=10,end=-2),
+               Gene=attributes %>% 
+                   str_extract('gene_name \"[\\w.]+\"') %>% 
+                   str_sub(start=12,end=-2)
+               )
+   
+
+}
+
+print_gff_nice <- function(gff_df) {
+    gff_df %>%
+    select(chromosome,start,end,peak_height,strand,ID,Gene) 
+}
+
+```
+
+
+# Load gtfs
+
+```{r load_gffs}
+# setwd("~/Repos/Ssd1_CRACanalysis_2020/rmarkdown")
+SRR847751_df <- read_FDR_gff("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyCalculateFDRs_analyses/SRR847751_trimmed_output_FDRs.gtf")
+
+```
+
+
+## Sort dataframes
+
+Print top peaks by (deduplicated) coverage in each sample.
+
+```{r print_descending, dependson="load_gffs"}
+
+SRR847751_df %>%
+    arrange(desc(peak_height)) %>%
+    print_gff_nice()
+
+```
+
+
+# Plot coverage vs FDR
+
+```{r plot_FDR_vs_height}
+ggplot(data=tibble(),aes(x=peak_height,y=FDR)) +
+    geom_point(data=SRR847751_df,aes(colour="SRR847751")) + 
+    scale_x_log10()
+```
+
+
+# Plot distribution of coverage
+
+
+```{r plot_peak_height, dependson="load_gffs",fig.width=6, fig.height=3}
+ggplot(data=tibble(),aes(x=peak_height)) +
+    geom_density(data=SRR847751_df,aes(colour="SRR847751"),kernel="rectangular") +
+    scale_x_log10(expand=c(0.01,0.01)) +
+    scale_y_continuous(expand=c(0,0)) +
+    labs(colour="Sample",x="Minimum Coverage by Gene") + 
+    theme(axis.line.y=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank(),
+          legend.position=c(0.8,0.8))
+    
+```
+
+# Choose top 500 peaks for each sample
+
+```{r sort_descending_top500, dependson="load_gffs"}
+
+#sort by peak_height descending
+SRR847751_df_desc500 <- SRR847751_df %>%
+    arrange(desc(peak_height)) %>%
+    head(n=500)
+
+```
+
+# Find sequences for peaks on the top 500 genes.
+
+
+```{r find_seqs_setup}
+S288C_FaF <- Rsamtools::FaFile("~/Ssd1_CRACanalysis_2020/input_annotation/Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa")
+Rsamtools::indexFa(S288C_FaF)
+
+getSeq_gffdf <- function(gff_df,faf=S288C_FaF) {
+    out_seqs <- getSeq(faf,
+                       makeGRangesFromDataFrame(gff_df) )
+    names(out_seqs) <- gff_df %>%
+        unite("peakname", chromosome, start, end, strand, ID,sep="_") %>%
+        pull(peakname)
+    return(out_seqs)
+}
+
+select_seqs_above_minwidth <- function(StringSet,minwidth=10) {
+    widths <- width(StringSet)
+    return( StringSet[ which(widths > minwidth) ])
+}
+
+```
+
+## Top 500 peaks, min width 8 (more inclusive)
+
+```{r write_desc500_minwidth8_peakseqs}
+SRR847751_desc500_minwidth8_peakseqs <- getSeq_gffdf(SRR847751_df_desc500) %>%
+    select_seqs_above_minwidth(minwidth=8) %T>% 
+    writeXStringSet(paste0(data_output_dir,
+                           "/Khd1_SRR847751_peaks_FDR_p0_01_desc500_minwidth_8.fa")
+                   )
+```
+
+## Top 100 peaks, min width 20 (more exclusive)
+
+```{r write_desc100_minwidth20_peakseqs}
+SRR847751_desc100_minwidth20_peakseqs <- SRR847751_df_desc500 %>%
+    head(n=100) %>%
+    getSeq_gffdf() %>%
+    select_seqs_above_minwidth(minwidth=20) %T>% 
+    writeXStringSet(paste0(data_output_dir,
+                           "/Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa")
+                    )
+```
+
+## MEME motif search
+
+Runs MEME motif search on top 100 peaks. We ran this with MEME 5.1.1
+
+```{r run_MEME, dependson="write_desc100_minwidth20_peakseqs"}
+run_MEME <- function(fafile, outputdir, nmotifs = 10, minw = 5, maxw = 8,dry_run = FALSE) {
+    cmd_meme <- paste("meme", fafile, "-dna", "-oc", outputdir, 
+                      "-mod anr", "-nmotifs", nmotifs, 
+                      "-minw", minw, "-maxw", maxw, 
+                      "-markov_order 1", "-objfun classic")
+    if (!dry_run) {
+        system(cmd_meme)
+    }
+    cmd_meme
+}
+run_MEME(paste0(data_output_dir,
+                           "Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa"),
+         paste0(data_output_dir,"Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20_MEME"),
+         dry_run = FALSE)
+
+```
+
+
+## Session Info
+
+Package versions, etc., that ran this file.
+
+```{r session_info,results="show",message=TRUE}
+sessionInfo()
+```
+
