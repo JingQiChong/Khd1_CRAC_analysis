@@ -1,0 +1,104 @@
+---
+title: "Peak analysis of Khd1/Hek2 CRAC data on specific genes after pileup analysis"
+authors: "Jing Qi Chong & Sam Haynes"
+date: "14th Apr 2022"
+output: html_document
+---
+##Summary
+This script extracts sequences near the Khd1 cross-linked peaks (+/-75 bases) and put them into a fasta file. 
+In the fasta file, some sequences have length >150 because some of the cross-linked peaks are very close together and the sequences that overlapped are merged together.  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache= TRUE)
+                     
+library(readr)
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(stringr)
+library(rtracklayer)
+library(intervals)
+library(ggplot2)
+```
+
+##function for loading the data 
+
+```{r pileup_functions}
+read_pileuptxt <- function(file) {
+    pileupdf <- readr::read_tsv(file = file,
+                    comment = "#",
+                    col_types = "cifiii",
+                    col_names = c("target","position","nucleotide",
+                                  "hits","substitutions","deletions")
+    )
+    pileupdf
+}
+```
+## Load pileup of khd1_SRR847751 for analysis
+```{r load_data }
+Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt")
+
+```
+## Selecting the cross-linked peaks
+```{r select_crosslinked_peaks}
+Khd1_SRR847751_filtered_5_df <- Khd1_SRR847751_df %>%
+  mutate(percent_del = (deletions / hits) * 100) %>%
+  filter( hits > 100, percent_del >= 4)
+```
+
+##Functions to select the bases of nearby sequences from the CS sites
+```{r select_specific_region_function}
+# function to extract hit and sequences data for binding regions
+get_binding_region_pickup_data <- function(current_target, start, end, datadf) {
+  
+    datadf %>%
+    filter(target == current_target, position %in% c(start:end))
+}
+
+# wrapper function to use Intervals package to find overlapping binding regions
+calc_overlap_regions <- function(start, end) {
+  tibble(start= start, end = end) %>%
+    Intervals() %>%
+    interval_union() %>%
+    as.data.frame() %>%
+    dplyr::rename(start = V1, end = V2)
+}
+```
+
+##Extract bases near the Khd1 cross-linked peaks (+/- 25 bases)
+```{r extract_sequences} 
+Khd1_SRR847751_binding_region_df <- Khd1_SRR847751_filtered_5_df %>%
+                            as_tibble() %>%
+                            mutate(start = position - 25 , end = position + 25 ) %>% 
+                            select(target, start, end)
+
+ 
+
+Khd1_target_overlapping_regions_df <- Khd1_SRR847751_binding_region_df %>%
+  group_by(target) %>%
+  summarise(calc_overlap_regions(start, end)) %>%
+  mutate(region_id = 1 : length(start)) %>%
+  ungroup()
+
+Khd1_target_fullinfo_df <- Khd1_target_overlapping_regions_df %>% 
+                           group_by(target, region_id) %>% 
+                           summarise(get_binding_region_pickup_data(target, start, end, datadf = Khd1_SRR847751_df)) %>%
+                           ungroup()  %>% mutate(motifid = paste(target,region_id, sep = "_"))
+```
+##Join the bases to form a string and put it into fasta file
+```{r generate_sequences_into_fastafile}
+join_bases <- function(id, datadf) {
+                filter(datadf, motifid == id) %>%
+                .$nucleotide %>%
+                as.character() %>%
+                paste(collapse = "")
+}
+
+all_motifs <-(unique(Khd1_target_fullinfo_df$motifid))
+
+for (i in all_motifs) {
+  allmotifs_seq_df <- data.frame(sequences= c(paste(">",i, sep = ""),join_bases(i, Khd1_target_fullinfo_df))) %>%
+  write_delim(., file = "~/CRAC_analysis_2022/khd1/khd1_SRR847751/MEME/Khd1_Targetgenes_del5_50.fa", quote = "none", col_names = FALSE, append = TRUE)
+}
+
+```
