@@ -1,0 +1,135 @@
+---
+title: "metaanalysis plot for binding distribution of Khd1 across mRNAs"
+author: "Jing Qi Chong"
+date: "4 May 2022"
+output: html_document
+---
+
+##Summary
+This script is to plot the distribution of Khd1 CRAC reads across target mRNAs
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache= TRUE)
+                     
+library(readr)
+library(tidyr)
+library(dplyr)
+library(forcats)
+library(stringr)
+library(ggplot2)
+library(Biostrings)
+library(valr)
+```
+
+##function for loading the data 
+```{r pileup_functions}
+read_pileuptxt <- function(file) {
+    pileupdf <- readr::read_tsv(file = file,
+                    comment = "#",
+                    col_types = "cifiii",
+                    col_names = c("target","position","nucleotide",
+                                  "hits","substitutions","deletions")
+    )
+    pileupdf
+}
+
+#gff
+read_gff <- function(file){
+    # tidyverse read gff function from rmonad vignette
+    # https://cran.r-project.org/web/packages/rmonad/vignettes/gff-processing.html
+    readr::read_tsv(
+        file,
+        col_names = c(
+            "chrom",
+            "source",
+            "type",
+            "start",
+            "end",
+            "score",
+            "strand",
+            "phase",
+            "attr",
+            "chr2",
+            "start2",
+            "end2",
+            "hits"
+        ),
+        na        = ".",
+        comment   = "#",
+        col_types = "ccciidcicciii"
+    )
+}
+```
+## Load files of khd1_SRR847751 for analysis
+```{r load_data }
+
+Khd1_SRR847751_allfeatures_df <- bind_rows(
+        read_gff("hits_minus_meta.bedgraph") %>%
+        mutate(ID = str_extract(attr,"ID=[A-Za-z0-9-_]+") %>%
+           str_remove("ID="),
+           Parent = str_extract(attr,"Parent=[A-Za-z0-9-_]+")%>%
+           str_remove("Parent="),
+           Gene = str_extract(Parent,"Y[A-Z0-9-]+")),
+        read_gff("hits_plus_meta.bedgraph") %>%
+        mutate(ID = str_extract(attr,"ID=[A-Za-z0-9-_]+") %>%
+           str_remove("ID="),
+           Parent = str_extract(attr,"Parent=[A-Za-z0-9-_]+")%>%
+           str_remove("Parent="),
+           Gene = str_extract(Parent,"Y[A-Z0-9-]+"))
+
+)
+
+NUTR_df <- filter(Khd1_SRR847751_allfeatures_df, type == "NUTR")
+fiveUTR_df <- filter(Khd1_SRR847751_allfeatures_df, type == "five_prime_UTR")
+threeUTR_df <- filter(Khd1_SRR847751_allfeatures_df, type == "three_prime_UTR")
+
+Khd1_SRR847751_selectedfeatures_df <- bind_rows(NUTR_df,fiveUTR_df,threeUTR_df)
+
+```
+##modified
+```{r}
+annotate_df <- Khd1_SRR847751_selectedfeatures_df %>%
+            mutate(mid = (start+end)/2) %>%
+            select(chrom,type,mid,strand,hits,ID,Gene) %>%
+            group_by(Gene) %>%
+            mutate(TP = mid - min(mid)+1 ) %>%
+            mutate(relpos = TP/ max(TP)*100 +100) %>%
+            ungroup()
+```
+
+##binning
+```{r}
+annotate_bin_df <- annotate_df %>%
+                  group_by(type) %>%
+  mutate(bin = cut(relpos, breaks = c(100:200))) %>%
+  #mutate(bin = cut(TP, breaks = 100)) 
+  mutate(typebin = paste0(type,bin)) %>%
+  ungroup() %>%
+  group_by(typebin) %>%
+  summarise(total_hits = sum(hits)) %>%
+  mutate(type = str_extract(typebin,"[A-Za-z]+"))
+
+```
+```{r}
+test_df <-annotate_bin_df %>%
+  separate(bin, c("start_bin", "end_bin"), sep = "[,]", convert= TRUE) %>%
+  mutate(start_bin = str_extract(start_bin,"[^(]+"),
+         end_bin = str_extract(end_bin,"[^]]+"), length_bin = end_bin -start_bin)
+```
+
+
+##Plot histogram
+```{r}
+Hit_density_plot <- ggplot(data = annotate_bin_df,aes(x= typebin)) +
+                    geom_col(aes(y= total_hits, fill = type)) +
+                    scale_fill_manual(values=c("red","blue","green"))+
+  scale_y_continuous(expand=c(0,0)) +
+  theme(axis.title.x =  element_blank(),
+                  axis.line.x = element_blank(),
+                  axis.text.x = element_blank(),
+                  axis.ticks.x = element_blank()) +
+                    labs(title = "Average Binding Distribution of Khd1", y = "reads")
+Hit_density_plot
+ggsave("../khd1_SRR847751/binding_distributions_plot_Khd1.png",Hit_density_plot,
+      height=6,width=8)
+```
