@@ -1,0 +1,307 @@
+---
+title: "Bedgraph plots on genome for Khd1 CRAC "
+author: Jing Qi Chong
+date: 2 October 2020
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+---
+
+# Summary
+
+This script produces genome browser-style figures of Khd1 and Ssd1 CRAC profiles from bedgraph data.
+
+This script relies on bedgraph files for both plus and minus strands, produced by `genomeCoverageBed` while running the pipeline, put in the directory `~/CRAC_analysis_2022/khd1/khd1_SRR847751/bedgraph_genomecov/`. So it must be run after nf_CRACpipeline 
+
+
+### Load Packages
+
+```{r setup,message=FALSE,echo=FALSE,cache=FALSE}
+knitr::opts_chunk$set(warning=FALSE,message=FALSE,echo=FALSE,cache=TRUE,
+                      results="hide",
+                      fig.path="figure/bedgraph-",
+                      cache.path="cache/bedgraph-")
+# load common functions
+library(tidyverse)
+library(ggplot2)
+library(cowplot)
+library(valr) # for read_bedgraph
+theme_set(theme_cowplot(font_size = 11) + 
+              theme(strip.background = element_blank(),
+                    strip.text.y = element_text(angle=0)))
+
+# setwd("~/CRAC_analysis_2020/khd1/khd1_SRR847751/rmarkdown/")
+```
+
+```{r plot_functions}
+
+onebreak <- function(lims,digits=1) {
+    # select axis breaks/ticks with 0 and one tick
+    c(0, signif(max(lims*.8), digits=digits) ) 
+}
+
+plot_bg <- function(bgbig,chromr,startr,endr,strandrev=FALSE,title=NULL,colourmain= c("blue", "green")) {
+    # plot bedgraph in genomic co-ordinates
+    bgplot <- 
+        ggplot(data=bgbig %>%
+                   filter(chrom==chromr, start >= startr, end <= endr), 
+               mapping= aes(ymin=0,ymax=value,xmin=start,xmax=end,fill=Sample)) +
+        geom_rect() +
+        facet_grid(Sample ~.,scales="free_y") +
+        scale_fill_manual(values=c("green","blue"))+
+        scale_y_continuous(expand=c(0,0),breaks=onebreak) +
+        expand_limits(x=c(startr,endr)) + 
+        labs(title=title, x=chromr, y="Reads") 
+    
+    if (strandrev) {
+        return( bgplot + scale_x_reverse(expand=c(0,0),limits=c(endr,startr)) )
+    } else {
+        return( bgplot + scale_x_continuous(expand=c(0,0),limits=c(startr,endr)) )
+    }
+}
+
+read_gff <- function(file){
+    # tidyverse read gff function from rmonad vignette
+    # https://cran.r-project.org/web/packages/rmonad/vignettes/gff-processing.html
+    readr::read_tsv(
+        file,
+        col_names = c(
+            "chrom",
+            "source",
+            "type",
+            "start",
+            "end",
+            "score",
+            "strand",
+            "phase",
+            "attr"
+        ),
+        na        = ".",
+        comment   = "#",
+        col_types = "ccciidcic"
+    )
+}
+
+plot_mRNA <- function(gff,gene,pad=0,gff_extra=NULL,colour_extra="red") {
+    # Plot an mRNA track (mRNA + five_prime_UTR + three_prime_UTR) from gff
+    # for only one mRNA transcript, names "gene"
+    gffsmall <- gff %>%
+        filter(Gene==gene)
+    mRNA_plot <- 
+      ggplot(data=gffsmall,
+           aes(xmin=start,xmax=end)) +
+        # geom_rect(data=filter(gffsmall,type=="mRNA"),
+        #           aes(ymin=-1,ymax=1),fill="darkblue") +
+        geom_rect(data=filter(gffsmall,type=="five_prime_UTR"),
+                  aes(ymin=-4,ymax=4),fill="darkblue") +
+        geom_rect(data=filter(gffsmall,type=="three_prime_UTR"),
+                  aes(ymin=-4,ymax=4),fill="darkblue") +
+        geom_rect(data=filter(gffsmall,type=="CDS"),
+                  aes(ymin=-10,ymax=10),fill="darkblue") +
+        theme_nothing()
+        # theme(axis.text.x = element_text(colour="black"),
+        #       axis.ticks.x=element_line(colour="black",size=0.5))
+    if(!is.null(gff_extra)) {
+        # select location of the mRNA features in gffsmall
+        small_chrom <- gffsmall$chrom[1]
+        small_strand <- gffsmall$strand[1]
+        small_start <- min(gffsmall$start) - pad
+        small_end   <- max(gffsmall$end) + pad
+        # filter gff_extra for only completely overlapping features
+        gff_extrasmall <- filter(gff_extra,
+                                 chrom == small_chrom,
+                                 strand == small_strand,
+                                 start >= small_start,
+                                 end <= small_end)
+        mRNA_plot <- 
+          mRNA_plot + 
+          geom_rect(data=gff_extrasmall,
+                    aes(ymin=-8,ymax=8),fill=colour_extra)
+    }
+    return(mRNA_plot)
+}
+
+# plot_mRNA(gff_H99,"CNAG_06125")
+
+plot_mRNAbg <- function(bgbig,gff,gene,strandrev=FALSE,pad=100,ptitle=NULL,gff_extra=NULL,colour_extra="red", colourmain= c("blue", "green")) {
+    gffmRNA <- gff %>%
+        filter(Gene==gene)
+    startr <- min(gffmRNA$start) - pad
+    endr   <- max(gffmRNA$end) + pad
+    bgplot <- plot_bg(bgbig,
+                      chromr = gffmRNA$chrom[1],
+                      startr = startr,
+                      endr = endr,
+                      strandrev = strandrev, colourmain = colour_main) 
+    
+    mplot <- plot_mRNA(gff,gene,pad=pad,
+                       gff_extra=gff_extra,colour_extra=colour_extra) 
+    if (strandrev) {
+        mplot <- mplot + 
+            scale_x_reverse(expand=c(0,0),limits=c(endr,startr))
+    } else {
+        mplot <- mplot + 
+            scale_x_continuous(expand=c(0,0),limits=c(startr,endr)) 
+    }
+    if (is.null(ptitle)) {
+      ptitle <- gene
+    }
+    tplot <- ggdraw() + 
+        draw_label(ptitle,fontface = 'bold',size = 11)
+    plot_grid(tplot,mplot,bgplot,
+              rel_heights = c(0.09,0.05,0.86),
+              ncol=1,align="v",axis="lr")
+}
+
+```
+
+
+### Load bedgraphs
+
+```{r load_bedgraph}
+bedgraph_dir <- "~/CRAC_analysis_2022/khd1/khd1_SRR847751/bedgraph_genomecov/"
+bgKhd1 <- bind_rows(
+    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
+        mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
+    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_minus.bedgraph")) %>%
+        mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1)
+  
+)
+
+bgSsd1 <- bind_rows(
+  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
+           mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
+  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
+           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
+)
+
+bgall <- bind_rows(
+    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
+        mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
+    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_minus.bedgraph")) %>%
+        mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1),
+    read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
+           mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
+  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
+           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
+)
+
+```
+
+### Load genome feature file
+
+```{r load_gff}
+gff_Sc <- read_gff("~/CRAC_analysis_2022/input_annotation/gff_ncRNAs_abundantverifiedmRNAparts.gff") %>%
+  mutate(ID = str_extract(attr,"ID=[A-Za-z0-9-_]+") %>%
+           str_remove("ID="), 
+         Parent = str_extract(attr,"Parent=[A-Za-z0-9-_]+")%>%
+           str_remove("Parent="),
+         Gene = str_extract(Parent,"Y[A-Z0-9-]+"))
+
+```
+
+
+#plot target genes
+
+```{r plot_2genes,dependson=c("load_bedgraph","load_gff","plot_functions"),fig.height=6,fig.width=6,units="in"}
+ASH1_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YKL185W", ptitle="ASH1",pad=200,colour_main = "green")
+
+ASH1_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="plus"),
+           gff=gff_Sc,gene="YKL185W", ptitle="ASH1",pad=200)
+
+#HSP150
+HSP150_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YJL159W", ptitle="HSP150",pad=200,colour_main = "green")
+HSP150_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="plus"),
+           gff=gff_Sc,gene="YJL159W", ptitle="HSP150",pad=200)
+
+#SUN4
+SUN4_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YNL066W", ptitle="SUN4",pad=200,colour_main = "green")
+SUN4_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="plus"),
+           gff=gff_Sc,gene="YNL066W", ptitle="SUN4",pad=200)
+#CCW12
+CCW12_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="minus"),
+           gff=gff_Sc,gene="YLR110C", ptitle="CCW12",pad=200,colour_main = "green",strandrev = TRUE)
+CCW12_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="minus"),
+           gff=gff_Sc,gene="YLR110C", ptitle="CCW12",pad=200,strandrev = TRUE)
+
+#SRL1
+SRL1_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YOR247W", ptitle="SRL1",pad=200,colour_main = "green")
+SRL1_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="plus"),
+           gff=gff_Sc,gene="YOR247W", ptitle="SRL1",pad=200)
+#SUC2
+SUC2_bgSsd1 <- 
+  plot_mRNAbg(bgbig=filter(bgSsd1,Sample %in% c("Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YIL162W", ptitle="SUC2",pad=200,colour_main = "green")
+SUC2_bgKhd1 <- 
+  plot_mRNAbg(bgbig=filter(bgKhd1,Sample %in% c("Khd1"),strand=="plus"),
+           gff=gff_Sc,gene="YIL162W", ptitle="SUC2",pad=200)
+
+plot_allgenes <- 
+  plot_grid(ASH1_bgKhd1,ASH1_bgSsd1,HSP150_bgKhd1,HSP150_bgSsd1,SUN4_bgKhd1,SUN4_bgSsd1,CCW12_bgKhd1,CCW12_bgSsd1,SRL1_bgKhd1,SRL1_bgSsd1, SUC2_bgKhd1,SUC2_bgSsd1, align = "v", ncol = 2, byrow= 2) 
+
+plot_allgenes
+  
+#ggsave("../khd1_SRR847751/figure_pileup/Khd1_Ssd1_targets_bedgraph.png",plot_allgenes,
+ #      height=8,width=10)
+
+
+```
+
+```{r fig.height=8,fig.width=10,units="in"}
+ASH1_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YKL185W", ptitle="ASH1",pad=200)
+SUN4_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YNL066W", ptitle="SUN4",pad=200)
+HSP150_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YJL159W", ptitle="HSP150",pad=200)
+CCW12_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="minus"),
+           gff=gff_Sc,gene="YLR110C", ptitle="CCW12",pad=200,strandrev = TRUE)
+SRL1_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YOR247W", ptitle="SRL1",pad=200)
+SUC2_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1","Ssd1"),strand=="plus"),
+           gff=gff_Sc,gene="YIL162W", ptitle="SUC2",pad=200)
+
+plot_alltranscripts <- plot_grid(ASH1_bgall,SUN4_bgall,HSP150_bgall,CCW12_bgall, SRL1_bgall, SUC2_bgall, ncol =2,align = "v")
+
+plot_alltranscripts
+ggsave("../khd1_SRR847751/figure_pileup/Khd1_Ssd1_targets_facet_bedgraph.png",plot_alltranscripts,
+       height=10,width=12)
+
+```
+```{r}
+def1_bgall <- 
+  plot_mRNAbg(bgbig=filter(bgall,Sample %in% c("Khd1", "Ssd1"),strand=="minus"),
+           gff=gff_Sc,gene="YKL054C", ptitle="DEF1",pad=200)
+
+def1_bgall
+```
+
+
+## Session Info
+
+Package versions, etc., that ran this file.
+
+```{r session_info,results="show",message=TRUE}
+sessionInfo()
+```
