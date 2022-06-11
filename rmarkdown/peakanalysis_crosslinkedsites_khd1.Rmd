@@ -5,8 +5,8 @@ date: "14th Apr 2022"
 output: html_document
 ---
 ##Summary
-This script extracts sequences near the Khd1 cross-linked peaks (+/-75 bases) and put them into a fasta file. 
-In the fasta file, some sequences have length >150 because some of the cross-linked peaks are very close together and the sequences that overlapped are merged together.  
+This script extracts sequences near the Khd1 cross-linked peaks (+/-25 bases) and put them into a fasta file. 
+In the fasta file, some sequences have length >50 because some of the cross-linked peaks are very close together and the sequences that overlapped are merged together.  
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache= TRUE)
