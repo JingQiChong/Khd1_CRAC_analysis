@@ -1,9 +1,14 @@
 ---
 title: "Peak analysis of Khd1/Hek2 CRAC data"
+author: "Jing Qi Chong"
+date: "9th Apr 2022"
 output: html_document
 ---
 #Summary
-Will be added soon
+This analysis searches for motifs associated with Khd1-bound RNA from the CRAC datasets using the MEME software.
+This script relies on Khd1-bound peak data in gtf format file produced by `pyCalculateFDRs.py` software in the nf_CRACpipeline and the genome sequence in fasta format (Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa) as input.
+
+This script filter Khd1 CRAC hits (peaks) by read count, width and false dicovery rate (FDR) and then generate fasta files that contains the sequences of the filtered peaks. Lastly, the MEME software is run to search for motifs enriched in the filtered peaks.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE)
@@ -59,8 +64,7 @@ print_gff_nice <- function(gff_df) {
 # Load gtfs
 
 ```{r load_gffs}
-# setwd("~/Repos/Ssd1_CRACanalysis_2020/rmarkdown")
-SRR847751_df <- read_FDR_gff("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyCalculateFDRs_analyses/SRR847751_trimmed_output_FDRs.gtf")
+SRR847751_df <- read_FDR_gff("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyCalculateFDRs_analyses/SRR847751_trimmed_output_FDRs.gtf")
 
 ```
 
@@ -118,7 +122,7 @@ SRR847751_df_desc500 <- SRR847751_df %>%
 
 
 ```{r find_seqs_setup}
-S288C_FaF <- Rsamtools::FaFile("~/Ssd1_CRACanalysis_2020/input_annotation/Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa")
+S288C_FaF <- Rsamtools::FaFile("~/Khd1_CRAC_analysis/input_annotation/Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa")
 Rsamtools::indexFa(S288C_FaF)
 
 getSeq_gffdf <- function(gff_df,faf=S288C_FaF) {

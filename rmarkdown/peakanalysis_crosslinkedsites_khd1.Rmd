@@ -36,7 +36,7 @@ read_pileuptxt <- function(file) {
 ```
 ## Load pileup of khd1_SRR847751 for analysis
 ```{r load_data }
-Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt")
+Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt")
 
 ```
 ## Selecting the cross-linked peaks
@@ -85,6 +85,7 @@ Khd1_target_fullinfo_df <- Khd1_target_overlapping_regions_df %>%
                            summarise(get_binding_region_pickup_data(target, start, end, datadf = Khd1_SRR847751_df)) %>%
                            ungroup()  %>% mutate(motifid = paste(target,region_id, sep = "_"))
 ```
+
 ##Join the bases to form a string and put it into fasta file
 ```{r generate_sequences_into_fastafile}
 join_bases <- function(id, datadf) {
@@ -98,7 +99,7 @@ all_motifs <-(unique(Khd1_target_fullinfo_df$motifid))
 
 for (i in all_motifs) {
   allmotifs_seq_df <- data.frame(sequences= c(paste(">",i, sep = ""),join_bases(i, Khd1_target_fullinfo_df))) %>%
-  write_delim(., file = "~/CRAC_analysis_2022/khd1/khd1_SRR847751/MEME/Khd1_Targetgenes_del5_50.fa", quote = "none", col_names = FALSE, append = TRUE)
+  write_delim(., file = "~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/MEME/Khd1_Targetgenes_del5_50.fa", quote = "none", col_names = FALSE, append = TRUE)
 }
 
 ```

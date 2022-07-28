@@ -143,7 +143,7 @@ annotate_CS <- function(mid, ...) {
 
 ## Load khd1_SRR847751 sample for analysis
 ```{r load_data}
-Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt",converturidine = TRUE)
+Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt",converturidine = TRUE)
 Khd1_SRR847751_filtered_4_df <- Khd1_SRR847751_df %>%
   mutate(percent_del = (deletions / hits) * 100) %>%
   filter( hits > 100, percent_del >= 4)
@@ -159,6 +159,7 @@ Khd1_targetted_genes <- data.frame((unique(sort(Khd1_SRR847751_filtered_4_df$tar
 ```{r plot_ASH1line,dependson = c("pileup_functions","load_data"),fig.height = 2,fig.width=4}
 plot_pileuphits_line(filter(Khd1_SRR847751_df, target == "ASH1") )
 ```
+
 ## Plot pileup focus on peaks ASH1
 ```{r plot_ASH1focus,dependson = c("pileup_functions","load_data"),fig.height = 4,fig.width=6}
 ASH1wide_df <- filter(Khd1_SRR847751_df, 
@@ -170,7 +171,7 @@ ASH1wide_plot <- plot_pileup_one(ASH1wide_df, include = "allsubdel") +
     labs(title = "ASH1 , pileup plot") 
     #annotate_CS(filter(Khd1_SRR847751_filtered_5_df,target=="ASH1")$position)
 ASH1wide_plot
-##ggsave(plot = ASH1wide_plot, filename = "../khd1_SRR847751/figure_pileup/ASH1_CS_plot.pdf",
+##ggsave(plot = ASH1wide_plot, filename = "../Khd1_SRR847751/figure_pileup/ASH1_CS_plot.pdf",
 #       height = 3, width=6, device = "pdf")
 ```
 
@@ -179,53 +180,20 @@ ASH1wide_plot
 
 ```{r plot_ASH1seq,dependson = c("pileup_functions","load_onetable"),fig.height = 3, fig.width=8}
 ASH1seq_df <- filter(Khd1_SRR847751_df, 
-                      target == "CCW12", 
-                      position >= 0, 
-                      position <= 120)
+                      target == "ASH1", 
+                      position >= 820, 
+                      position <= 880)
 ASH1seq_plot <- plot_pileup_one(ASH1seq_df, 
                                    include = "allsubdel", 
                                    nucseq = TRUE, nuctxtsize = 2) + 
-    labs(title = "CCW12 pileup plot")
+    labs(title = "ASH1 pileup plot")
 ASH1seq_plot
-ggsave(plot = ASH1seq_plot, filename = "../khd1_SRR847751/figure_pileup/CCW12_seqplot.png",
-       height = 3, width=10, device = "png")
+
+#ggsave(plot = ASH1seq_plot, filename = "../Khd1_SRR847751/figure/ASH1_seqplot.png",
+ #      height = 3, width=10, device = "png")
 ```  
 
-## Plot pileups centred only on Khd1-enriched motifs
-
-Plot pileup on same area surrounding the CNN motifs (-12, +2) to look for consistent location of crosslinking sites.
-
-```{r CNN_positions_all,dependson = c("pileup_functions","load_onetable"),fig.height = 12, fig.width =12}
-CNN_positions_all <- position_locate_all(Khd1_SRR847751_df) %>%
-    as_tibble() %>%
-    mutate(motifid = 1:nrow(.))
-
-get_chunk <- function(sedf,datadf) {
-    datadf[sedf$start : sedf$end,]
-}
-
-CNN_motif_pileups <- 
-    CNN_positions_all[-1,] %>%
-    mutate(start = start - 12, end=end + 2) %>%
-    group_by(motifid) %>%
-    do(get_chunk(., datadf = Khd1_SRR847751_df)) %>%
-    mutate(motifidg = paste(target, motifid),
-           maxhits = max(hits)) %>%
-    filter(maxhits > 150)
-
-CNN_motif_pileups %>%
-    do(plot = plot_pileup_one(.,include = "allsubdel",
-                              nucseq = TRUE,nuctxtsize = 2) +
-        theme(legend.position = "none") + 
-           labs(title = .$motifidg[1])) %>%
-    .$plot %>%
-    plot_grid(plotlist = .)
-# CNN_motifs
-```
-
-
 ## Find CNN motif positions separately for each transcript
-
 ```{r CNN_positions_bytx,dependson = c("pileup_functions","load_onetable"),fig.height = 8, fig.width = 8}
 position_locate_all <- function(posdf,
                                 pattern = "C[ACUG][ACUG]C[ACUG][ACUG]C[ACUG][ACUG]") {
@@ -243,6 +211,7 @@ CNN_positions_bytx <- Khd1_SRR847751_df %>%
 CNN_positions_bytx
 
 ```
+
 ##Plot pileup near Khd1 cross-linked sites
 ```{r plot_ASH1_reproducibility}
 #ASH1
@@ -303,23 +272,9 @@ pileup_plot_allgenes <-
 
 pileup_plot_allgenes
 
-ggsave(plot = pileup_plot_allgenes, 
-        filename = "../khd1_SRR847751/figure_pileup/Composite_CS_CNN_pileupplot.png",
-        height = 8, width = 9, device = "png")
-
-```
-
-##Plot pileup near Khd1 cross-linked sites
-```{r plot_ASH1_reproducibility}
-HSP150_widerep_df <- filter(Khd1_SRR847751_df,target== "HSP150") 
-       
-
-HSP150_widerep_plot <- 
-    plot_pileup_one(ASH1_widerep_df, include = "allsubdel") + 
-    labs(title = "HSP150 peak", x = "position from TSS")  +
-    xlim(min(ASH1_widerep_df$position) - 1,max(ASH1_widerep_df$position) + 1) +
-    annotate_CNN(filter(CNN_positions_bytx,target=="HSP150")$mid) 
-HSP150_widerep_plot
+#ggsave(plot = pileup_plot_allgenes, 
+ #       filename = "../Khd1_SRR847751/figure_pileup/Composite_CS_CNN_pileupplot.png",
+  #      height = 8, width = 9, device = "png")
 
 ```
 
