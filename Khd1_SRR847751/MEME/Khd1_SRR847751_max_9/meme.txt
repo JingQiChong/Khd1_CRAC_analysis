@@ -1,0 +1,1733 @@
+********************************************************************************
+MEME - Motif discovery tool
+********************************************************************************
+MEME version 5.4.1 (Release date: Sat Aug 21 19:23:23 2021 -0700)
+
+For further information on how to interpret these results please access https://meme-suite.org/meme.
+To get a copy of the MEME Suite software please access https://meme-suite.org.
+
+********************************************************************************
+
+
+********************************************************************************
+REFERENCE
+********************************************************************************
+If you use this program in your research, please cite:
+
+Timothy L. Bailey and Charles Elkan,
+"Fitting a mixture model by expectation maximization to
+discover motifs in biopolymers",
+Proceedings of the Second International Conference on Intelligent Systems
+for Molecular Biology, pp. 28-36, AAAI Press, Menlo Park, California, 1994.
+********************************************************************************
+
+
+********************************************************************************
+TRAINING SET
+********************************************************************************
+PRIMARY SEQUENCES= ./Khd1_SRR847751/MEME/Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa
+CONTROL SEQUENCES= --none--
+ALPHABET= ACGT
+Sequence name            Weight Length  Sequence name            Weight Length  
+-------------            ------ ------  -------------            ------ ------  
+chrV_140198_140287_-_YEL 1.0000     90  chrV_86217_86256_+_YEL03 1.0000     40  
+chrIV_601367_601517_+_YD 1.0000    151  chrIV_1017210_1017265_-_ 1.0000     56  
+chrIV_600931_600980_+_YD 1.0000     50  chrIX_128703_128781_+_YI 1.0000     79  
+chrIV_601290_601364_+_YD 1.0000     75  chrI_72140_72211_+_YAL03 1.0000     72  
+chrIV_205386_205677_-_YD 1.0000    292  chrVII_88152_88274_+_YGL 1.0000    123  
+chrXVI_462476_462541_-_Y 1.0000     66  chrIV_601066_601110_+_YD 1.0000     45  
+chrXII_369863_369925_-_Y 1.0000     63  chrIV_601132_601175_+_YD 1.0000     44  
+chrXV_798024_798074_+_YO 1.0000     51  chrXV_798024_798074_+_YO 1.0000     51  
+chrI_72939_73020_+_YAL03 1.0000     82  chrIV_110088_110464_+_YD 1.0000    377  
+chrXII_462543_462578_-_Y 1.0000     36  chrXII_709016_709183_-_Y 1.0000    168  
+chrXVI_303199_303245_+_Y 1.0000     47  chrXII_877243_877374_-_Y 1.0000    132  
+chrVIII_75628_75724_+_YH 1.0000     97  chrXVI_462381_462471_-_Y 1.0000     91  
+chrX_76390_76459_+_YJL18 1.0000     70  chrIV_601249_601270_+_YD 1.0000     22  
+chrXI_163645_163716_-_YK 1.0000     72  chrIV_601024_601045_+_YD 1.0000     22  
+chrIV_205929_206092_-_YD 1.0000    164  chrVII_876814_876882_-_Y 1.0000     69  
+chrXII_370111_370133_-_Y 1.0000     23  chrXI_142296_142335_-_YK 1.0000     40  
+chrXIV_352413_352446_+_Y 1.0000     34  chrXI_259335_259443_+_YK 1.0000    109  
+chrIV_170454_170678_-_YD 1.0000    225  chrXI_327028_327077_-_YK 1.0000     50  
+chrXIV_434974_435049_+_Y 1.0000     76  chrXIII_879784_879987_-_ 1.0000    204  
+chrVI_54084_54156_-_YFL0 1.0000     73  chrX_651943_652003_+_YJR 1.0000     61  
+chrVII_519370_519734_+_Y 1.0000    365  chrI_72068_72131_+_YAL03 1.0000     64  
+chrVII_482594_482666_-_Y 1.0000     73  chrXII_370046_370085_-_Y 1.0000     40  
+chrXI_337236_337458_-_YK 1.0000    223  chrXII_369931_369971_-_Y 1.0000     41  
+chrV_332750_332831_-_YER 1.0000     82  chrVII_89103_89144_+_YGL 1.0000     42  
+chrXIV_25557_25676_+_YNL 1.0000    120  chrX_292056_292103_-_YJL 1.0000     48  
+chrVI_54029_54071_-_YFL0 1.0000     43  chrVII_479486_479548_-_Y 1.0000     63  
+chrVII_89249_89345_+_YGL 1.0000     97  chrXV_823118_823175_-_YO 1.0000     58  
+chrXV_160537_160614_-_YO 1.0000     78  chrXII_815479_815524_+_Y 1.0000     46  
+chrXI_380835_380895_-_YK 1.0000     61  chrXII_709431_709491_-_Y 1.0000     61  
+chrIII_57430_57531_-_YCL 1.0000    102  chrXIII_291830_291903_+_ 1.0000     74  
+chrV_333160_333203_-_YER 1.0000     44  chrIV_721207_721281_-_YD 1.0000     75  
+chrXI_336885_336918_-_YK 1.0000     34  chrVIII_386134_386221_+_ 1.0000     88  
+chrXI_552213_552259_+_YK 1.0000     47  chrXIII_879678_879718_-_ 1.0000     41  
+chrX_120653_120750_+_YJL 1.0000     98  chrXII_232773_232819_-_Y 1.0000     47  
+chrI_71966_72005_+_YAL03 1.0000     40  chrXII_499131_499177_+_Y 1.0000     47  
+chrXV_253155_253210_-_YO 1.0000     56  chrIX_128567_128627_+_YI 1.0000     61  
+chrVII_88287_88375_+_YGL 1.0000     89  chrIX_128421_128488_+_YI 1.0000     68  
+chrXIV_27078_27117_+_YNL 1.0000     40  chrXII_806637_806693_+_Y 1.0000     57  
+chrXI_337505_337597_-_YK 1.0000     93  chrVII_1049847_1049888_- 1.0000     42  
+chrXII_556266_556381_+_Y 1.0000    116  chrXIII_360812_360853_-_ 1.0000     42  
+chrVII_1049564_1049737_- 1.0000    174  chrX_120557_120647_+_YJL 1.0000     91  
+chrIX_128500_128539_+_YI 1.0000     40  chrXI_259224_259248_+_YK 1.0000     25  
+chrVII_876999_877145_-_Y 1.0000    147  chrXIII_220125_220165_+_ 1.0000     41  
+chrVII_379190_379241_+_Y 1.0000     52  chrIV_1489753_1489789_-_ 1.0000     37  
+chrX_291690_291776_-_YJL 1.0000     87  chrXI_337599_337658_-_YK 1.0000     60  
+chrXV_679977_680012_+_YO 1.0000     36  
+********************************************************************************
+
+********************************************************************************
+COMMAND LINE SUMMARY
+********************************************************************************
+This information can also be useful in the event you wish to report a
+problem with the MEME software.
+
+command: meme ./Khd1_SRR847751/MEME/Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa -dna -oc ./Khd1_SRR847751/MEME/Khd1_SRR847751_max_9 -mod anr -nmotifs 10 -minw 6 -maxw 9 -markov_order 1 -objfun classic 
+
+model:  mod=           anr    nmotifs=        10    evt=           inf
+objective function:           em=       E-value of product of p-values
+                              starts=   E-value of product of p-values
+strands: +
+width:  minw=            6    maxw=            9
+nsites: minsites=        2    maxsites=      455    wnsites=       0.8
+theta:  spmap=         uni    spfuzz=        0.5
+em:     prior=   dirichlet    b=            0.01    maxiter=        50
+        distance=    1e-05
+trim:   wg=             11    ws=              1    endgaps=       yes
+data:   n=            7488    N=              91
+sample: seed=            0    hsfrac=          0
+        searchsize=   7488    norand=         no    csites=       1000
+Letter frequencies in dataset:
+A 0.296 C 0.3 G 0.163 T 0.242 
+Background letter frequencies (from file dataset with add-one prior applied):
+A 0.296 C 0.3 G 0.163 T 0.242 
+Background model order: 1
+********************************************************************************
+
+
+********************************************************************************
+MOTIF CWWCMWCWD MEME-1	width =   9  sites = 142  llr = 809  E-value = 6.1e-026
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 Description
+--------------------------------------------------------------------------------
+Simplified        A  :54:35:53
+pos.-specific     C  a2:a5:a1:
+probability       G  ::2::1::5
+matrix            T  :34:24:42
+
+         bits    2.6          
+                 2.4          
+                 2.1          
+                 1.8 *  *  *  
+Relative         1.6 *  *  *  
+Entropy          1.3 *  *  *  
+(8.2 bits)       1.0 *  *  *  
+                 0.8 *  *  * *
+                 0.5 **** ****
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           CAACCACAG
+consensus             TT AT TA
+sequence                 T   T
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrIII_57430_57531_-_YCL     73  6.73e-06 GAAGAGGAAT CATCCACTG AACTCGCTTC
+chrIV_721207_721281_-_YD     24  3.54e-05 TGTCCATTGC CAACCACTG AAGCACCAAA
+chrXI_337505_337597_-_YK     72  5.78e-05 GCAACAACAA CAACCACAG CAACCACAAC
+chrXI_337505_337597_-_YK     54  5.78e-05 GCAACCACAG CAACCACAG CAACAACAAC
+chrXI_337505_337597_-_YK     45  5.78e-05 GCAACCACAG CAACCACAG CAACCACAGC
+chrXI_337505_337597_-_YK     36  5.78e-05 GCAACCACAG CAACCACAG CAACCACAGC
+chrXI_337505_337597_-_YK     27  5.78e-05 GCAACCACAG CAACCACAG CAACCACAGC
+chrXI_337505_337597_-_YK     18  5.78e-05 ACAACCACAG CAACCACAG CAACCACAGC
+chrXI_337505_337597_-_YK      9  5.78e-05   AATCCCAA CAACCACAG CAACCACAGC
+chrVII_1049847_1049888_-     31  1.06e-04 GCTGTGGTCA CTACCACTG TTC       
+chrIX_128567_128627_+_YI     24  1.06e-04 GCTGCTCCAA CATCTACTG TCGTGTCAAC
+chrXI_259335_259443_+_YK     28  1.06e-04 ATCCAAGCTA CTACCACTG CTACCACCGA
+chrXV_798024_798074_+_YO     14  1.06e-04 TTGTCTCCAT CATCTACTG CAGCAAGTGT
+chrXV_798024_798074_+_YO     14  1.06e-04 TTGTCTCCAT CATCTACTG CAGCAAGTGT
+chrX_120557_120647_+_YJL     68  1.54e-04 ACATCCAGCG CATCATCTG CAGCCACCAC
+chrVII_482594_482666_-_Y     38  1.54e-04 TCCTCTTCAG CATCTTCTG TTTCAGCTCA
+chrIV_600931_600980_+_YD      2  1.54e-04          A CATCTTCTG AAGCTCCAGA
+chrXIII_879784_879987_-_    114  1.92e-04 TCCTCAACTT CATCTTCAG CTTCATCCTC
+chrXII_556266_556381_+_Y     74  2.35e-04 ACCTCATCAA CAACAACAG CAGCAGCAGC
+chrIX_128421_128488_+_YI     59  2.35e-04 GCCGCTGCAT CTGCCACTG C         
+chrXI_380835_380895_-_YK     37  2.35e-04 GCAACAGCAG CAACAACAG CATCCAGTGG
+chrXI_337236_337458_-_YK     77  2.35e-04 ACAATACGCT CAACAACAG CATCAGTTAC
+chrXI_337236_337458_-_YK     53  2.35e-04 CTACTATACT CAACAACAG CAGCAACAAT
+chrIV_170454_170678_-_YD    162  2.35e-04 TTCGCATCAG CAACAACAG GCGTATCCTC
+chrIV_110088_110464_+_YD    104  2.35e-04 TCCTTGGTTG CAACTTCTG AGTCACCAAG
+chrIV_601132_601175_+_YD      8  2.35e-04    AACGGTA CTTCTACTG AAGCTCCAAC
+chrXIV_25557_25676_+_YNL     26  2.82e-04 GTTTCAGGAG CTTCATCTG CAAGTCAATC
+chrXII_709016_709183_-_Y     48  2.82e-04 TCTGCTTCAA CTTCATCTG CTTCAACTTC
+chrXII_709016_709183_-_Y     33  2.82e-04 GCAGCCTCAA CTTCATCTG CTTCAACTTC
+chrVII_88152_88274_+_YGL     61  2.82e-04 TCCTGCACCA CTTCAACAG CACCAGCAAC
+chrIX_128703_128781_+_YI     41  2.82e-04 TCTTCTTCTT CTTCTTCTG GCAGTGGTAG
+chrIV_601132_601175_+_YD     32  3.42e-04 CCAACTGATA CTACTACTG AAGC      
+chrIV_601066_601110_+_YD     32  3.42e-04 CCAACTGATA CTACTACTG AAGCT     
+chrVII_876999_877145_-_Y     14  4.40e-04 TCTTCCTCTT CATCCACAT CTCCATCTTC
+chrXII_556266_556381_+_Y    104  4.40e-04 GCAGCAACAG CAGCAACAG GGAT      
+chrXII_556266_556381_+_Y     95  4.40e-04 GCAGCAGCAG CAGCAACAG CAGCAACAGG
+chrXI_380835_380895_-_YK     19  4.40e-04 ACATCATCAT CTACAACAG CAACAGCAGC
+chrXI_337236_337458_-_YK    146  4.40e-04 ACAGCAACAG CATCCACAA CCTCAATCAC
+chrXI_337236_337458_-_YK    137  4.40e-04 TGCTCAGCAA CAGCAACAG CATCCACAAC
+chrXI_337236_337458_-_YK     95  4.40e-04 GCATCAGTTA CAGCAACAG TATTTGTCCC
+chrVII_482594_482666_-_Y     26  4.40e-04 TCCTCTTCAT CATCCTCTT CAGCATCTTC
+chrVII_482594_482666_-_Y     14  4.40e-04 ACTGATACAT CATCCTCTT CATCATCCTC
+chrIV_170454_170678_-_YD    129  4.40e-04 GCAGCAACAT CATCCACAA TTCATGGTTC
+chrXIII_879784_879987_-_     96  5.41e-04 TCCTCACCCT CATCCTCAT CCTCAACTTC
+chrIV_170454_170678_-_YD    210  5.41e-04 GCAGGGGTAT CCTCCACAG CAGGAAC   
+chrXII_877243_877374_-_Y     14  5.41e-04 TTGCACCCTC CATCCTCAA TTCCTGCTCC
+chrIV_601290_601364_+_YD     48  5.41e-04 TGTCCAGAAC CAACCACTT TCACCACAAA
+chrIV_601367_601517_+_YD    124  5.41e-04 TGTCCAGAAC CAACCACTT TCACCACAAA
+chrXI_337599_337658_-_YK     49  6.47e-04 TACTGTACCT CAACCACAA CAA       
+chrXII_556266_556381_+_Y     47  6.47e-04 TTATCAACAA CAACCACAA TACATTCAAC
+chrXII_556266_556381_+_Y     17  6.47e-04 CTTCCAACAA CAACCACAA TACACTCAAA
+chrXI_337505_337597_-_YK     81  6.47e-04 ACAACCACAG CAACCACAA CAAC      
+chrVII_88287_88375_+_YGL     40  6.47e-04 TGGACAACAA CAACCACAA CAATCTAACC
+chrVIII_386134_386221_+_     68  6.47e-04 TCGTCTTCCA CTTCCGCAG TTGAGTCATC
+chrXIII_879784_879987_-_    126  6.47e-04 TCTTCAGCTT CATCCTCCG CTTCATCTAG
+chrXI_259335_259443_+_YK     52  6.47e-04 ACCGAAGCTA CCACCACTG CTGCCCCATC
+chrIV_601367_601517_+_YD     64  6.47e-04 GAAAAGCCAA CAACCACAT CAACCACCGA
+chrIV_601367_601517_+_YD     16  6.47e-04 GTCACTGAAC CAACCACAT TGACTATCAC
+chrVII_876999_877145_-_Y      5  7.65e-04       GTAT CTTCCTCTT CATCCACATC
+chrX_120557_120647_+_YJL     80  7.65e-04 TCATCTGCAG CCACCACAG CCT       
+chrVII_1049564_1049737_-    129  7.65e-04 TCCCAAGCTT CTTCCTCTA GTTCTTCCGG
+chrVII_1049564_1049737_-    108  7.65e-04 TCTACTCAAT CTTCCTCTT CCTCCCAAGC
+chrVII_1049564_1049737_-     30  7.65e-04 ACCGCTGCTG CTTCCTCTT CTGAGAACAA
+chrVII_1049564_1049737_-     18  7.65e-04 GCTTCTGTAG CTACCGCTG CTGCTTCCTC
+chrVII_1049564_1049737_-      6  7.65e-04      GTCTG CTGCTTCTG TAGCTACCGC
+chrXII_556266_556381_+_Y     62  7.65e-04 ACAATACATT CAACCTCAT CAACAACAAC
+chrIX_128421_128488_+_YI     11  7.65e-04 ATTGCTGTTT CATCTGCTG CCTTAGCCAA
+chrX_120653_120750_+_YJL     59  7.65e-04 GCTACCACTA CTGCTTCTG TCTCTACCAA
+chrXI_336885_336918_-_YK      8  7.65e-04    ATATGGT CAACCTCAA TACGGTGTAG
+chrXI_337236_337458_-_YK    167  7.65e-04 TCAATCACAA CAACCTCAA TCACAGCAAA
+chrIX_128703_128781_+_YI      2  7.65e-04          A CTTCCTCTT CCTCTTCCTC
+chrIV_601367_601517_+_YD     73  7.65e-04 ACAACCACAT CAACCACCG AATACACTGT
+chrVII_876999_877145_-_Y     62  9.07e-04 AAAACACTTG CTTCCTCAT CAGTCACCAC
+chrXII_806637_806693_+_Y     12  9.07e-04 TTGCTGCTTC CTACCACTA CCCTGAAATT
+chrX_120653_120750_+_YJL     50  9.07e-04 GTCCAAGCTG CTACCACTA CTGCTTCTGT
+chrXI_259335_259443_+_YK     70  9.07e-04 GCTGCCCCAT CTTCCACCG TTGAAACTGT
+chrV_140198_140287_-_YEL     70  9.07e-04 ACAGCTCACT CATCTACTT CGCAATCAAA
+chrVII_876999_877145_-_Y     26  1.10e-03 TCCACATCTC CATCTTCTT CGACCGCTAC
+chrVII_89249_89345_+_YGL      5  1.10e-03       CGGT CATCATCTT GGCTGGAAGT
+chrVII_519370_519734_+_Y    311  1.10e-03 TTGCTTACAC CATCAACAT CCTCTTTAAG
+chrIV_170454_170678_-_YD     60  1.10e-03 ACAGAGCTAT CATCAACAA GCGATACCTC
+chrXI_142296_142335_-_YK      1  1.10e-03          . CAACTGCTG CAGCTGTCTC
+chrIV_601024_601045_+_YD      8  1.10e-03    AACGGTA CCTCTACTG AAGCTC    
+chrIV_601066_601110_+_YD      8  1.10e-03    AACGGTA CCTCTACTG AAGCTCCAAC
+chrXI_380835_380895_-_YK     28  1.30e-03 TCTACAACAG CAACAGCAG CAACAACAGC
+chrVII_519370_519734_+_Y    278  1.30e-03 ACGCCAACCC CATCTTCAA AGGCATCCTC
+chrXIV_434974_435049_+_Y     18  1.30e-03 TCCTAGAACA CATCATCAA TGGTCACTAA
+chrXI_259335_259443_+_YK     37  1.30e-03 ACTACCACTG CTACCACCG AAGCTACCAC
+chrXI_163645_163716_-_YK     29  1.30e-03 GACCCAGAAG CTGCCGCTG CTGGTGCCGC
+chrXII_709016_709183_-_Y     24  1.30e-03 AAAACCTCAG CAGCCTCAA CTTCATCTGC
+chrIV_110088_110464_+_YD     38  1.30e-03 TCCAGAGCTC CCTCTTCTG TGTCAATGGT
+chrVII_379190_379241_+_Y     43  1.51e-03 GATACAATCA CAACAACAA A         
+chrXI_337505_337597_-_YK     63  1.51e-03 GCAACCACAG CAACAACAA CAACCACAGC
+chrXI_380835_380895_-_YK      4  1.51e-03        CAA CAACAACAT CATCATCTAC
+chrXIV_25557_25676_+_YNL     77  1.51e-03 AACTCCACAA CATCATCCG CAACTCAATT
+chrXI_337236_337458_-_YK    113  1.51e-03 GTATTTGTCC CAACAACAA CAATATGCTC
+chrXIII_879784_879987_-_    150  1.51e-03 TCTAGTATCT CAGCCTCCG GTGCTAAGGG
+chrXIII_879784_879987_-_     23  1.51e-03 CGTCACTTCT CAACAACAA ACCAGCACTC
+chrXII_709016_709183_-_Y     57  1.51e-03 ACTTCATCTG CTTCAACTT CTCAGAAAAA
+chrVI_54084_54156_-_YFL0     36  1.72e-03 GGCATCATAC CTTCTACAA CGAATTGAGA
+chrXIII_879784_879987_-_    135  1.72e-03 TCATCCTCCG CTTCATCTA GTATCTCAGC
+chrVII_876814_876882_-_Y     21  1.72e-03 GGTGGTGTCG CAACATCAA GTAATGACGT
+chrXII_556266_556381_+_Y     83  1.92e-03 ACAACAACAG CAGCAGCAG CAGCAGCAAC
+chrXV_253155_253210_-_YO     31  1.92e-03 AGAGCCGGTG CTACTACTT CCCGTTTCAT
+chrVII_1049564_1049737_-     93  2.12e-03 AGCTCTGCTG CTACATCTA CTCAATCTTC
+chrIX_128567_128627_+_YI     42  2.12e-03 GTCGTGTCAA CTTCTTCCG CAACCCAATC
+chrXIII_879784_879987_-_     57  2.12e-03 TCTTCCGAGG CAGCATCTA CGGTTGGTTC
+chrIV_170454_170678_-_YD    114  2.12e-03 ATTTGCTATT CCTCCGCAG CAACATCATC
+chrIV_170454_170678_-_YD     96  2.12e-03 ATTACCATCT CAGCAACAA TTTGCTATTC
+chrIV_170454_170678_-_YD     78  2.12e-03 AGCGATACCT CAGCAACAA TTACCATCTC
+chrVII_876999_877145_-_Y    113  2.34e-03 GAAAAGCAAT CCTCCTCTT CATCCAAGAA
+chrIV_110088_110464_+_YD     64  2.34e-03 GGTATCACCA CCTCCTCTA CACAAAAATT
+chrIX_128703_128781_+_YI     26  2.34e-03 TCCTCCTCCT CCTCCTCTT CTTCTTCTTC
+chrIX_128500_128539_+_YI      7  2.50e-03     AAGGGG CATCCTCCT CCTCCTCCTC
+chrVII_519370_519734_+_Y    155  2.50e-03 ATCAATGCAA CAGCTTCCG AATACCATAG
+chrVII_519370_519734_+_Y     47  2.50e-03 TCACTACAGC CCACCACTA CATCCTCCCA
+chrIV_170454_170678_-_YD    177  2.50e-03 ACAGGCGTAT CCTCCACCG CAAATGCCAT
+chrIV_110088_110464_+_YD    148  2.50e-03 TCCATACGCT CCTCCTCAA TCATCACAAC
+chrIV_110088_110464_+_YD    247  2.69e-03 CTATGCTCCA CCACCACAA CAAAGAGTAG
+chrIV_110088_110464_+_YD     19  2.69e-03 CATGCCTCCG CCACCTCTT TCCAGAGCTC
+chrVII_88152_88274_+_YGL     76  2.69e-03 ACAGCACCAG CAACCACCT ATCCTTCCCC
+chrX_120557_120647_+_YJL     20  2.87e-03 ACCGACTACG CTTCCACCT TCGGTATTGC
+chrXII_709016_709183_-_Y      6  2.87e-03      AGTTG CCACCTCAA AAACCTCAGC
+chrVII_519370_519734_+_Y    236  3.01e-03 AACAGCAGTT CTGCTTCCG CTCCATTGGA
+chrIX_128703_128781_+_YI     14  3.01e-03 TCCTCTTCCT CTTCCTCCT CCTCCTCCTC
+chrIII_57430_57531_-_YCL     54  3.29e-03 ACCACCTGTT CCTCAACAA GAAGAGGAAT
+chrIII_57430_57531_-_YCL     42  3.29e-03 CATGATATCC CTACCACCT GTTCCTCAAC
+chrIV_601249_601270_+_YD      2  3.29e-03          A CTACCACCA CTCCTCCTTA
+chrXII_709016_709183_-_Y    129  3.29e-03 ACTTTATCTC CAACTGCAA GCAGCGCTAT
+chrIV_110088_110464_+_YD    329  3.29e-03 CCATATGCTC CAACTGCAA CCACTCAACC
+chrVII_1049564_1049737_-     75  3.54e-03 GCCGCATCTC CAGCCTCCA GCTCTGCTGC
+chrVII_1049564_1049737_-     63  3.54e-03 CAAGTTTCTG CTGCCGCAT CTCCAGCCTC
+chrVII_876999_877145_-_Y     77  3.77e-03 TCATCAGTCA CCACATCTA GTTCCATTAG
+chrX_120557_120647_+_YJL     53  3.77e-03 CAACCAATCT CCACTACAT CCAGCGCATC
+chrVII_1049564_1049737_-    157  3.77e-03 GCGAAGACGT CAGCAGCTT TGCCTCTGG 
+chrX_120653_120750_+_YJL     86  3.77e-03 AAGAGTACCG CTGCCGCCG TTTC      
+chrXI_163645_163716_-_YK     44  4.00e-03 GCTGCTGGTG CCGCTGCTG TTGCCAACCA
+chrIV_110088_110464_+_YD    188  4.00e-03 GGTACTATTT CTACAGCAA ACCAAACGTC
+chrX_291690_291776_-_YJL     32  4.14e-03 GAAGTCAACG CCGCAACTA TCATTAACCC
+chrVII_876999_877145_-_Y     38  4.14e-03 TCTTCTTCGA CCGCTACTT CATCTAAAAC
+chrXIII_879784_879987_-_     81  4.14e-03 GGTTCTTCGA CTTCATCCT CACCCTCATC
+chrI_72939_73020_+_YAL03     52  4.14e-03 ATTGTCTTGT CCACTTCCG GTACCACCCC
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrIII_57430_57531_-_YCL           0.0033  41_[+1]_3_[+1]_10_[+1]_21
+chrIV_721207_721281_-_YD          3.5e-05  23_[+1]_43
+chrXI_337505_337597_-_YK           0.0015  8_[+1]_[+1]_[+1]_[+1]_[+1]_[+1]_
+                                           [+1]_[+1]_[+1]_4
+chrVII_1049847_1049888_-          0.00011  30_[+1]_3
+chrIX_128567_128627_+_YI           0.0021  23_[+1]_9_[+1]_11
+chrXI_259335_259443_+_YK          0.00065  27_[+1]_[+1]_6_[+1]_9_[+1]_31
+chrXV_798024_798074_+_YO          0.00011  13_[+1]_29
+chrXV_798024_798074_+_YO          0.00011  13_[+1]_29
+chrX_120557_120647_+_YJL           0.0029  19_[+1]_24_[+1]_6_[+1]_3_[+1]_3
+chrVII_482594_482666_-_Y          0.00044  13_[+1]_3_[+1]_3_[+1]_27
+chrIV_600931_600980_+_YD          0.00015  1_[+1]_40
+chrXIII_879784_879987_-_           0.0041  22_[+1]_25_[+1]_15_[+1]_6_[+1]_
+                                           9_[+1]_3_[+1]_[+1]_6_[+1]_46
+chrXII_556266_556381_+_Y           0.0019  16_[+1]_21_[+1]_6_[+1]_3_[+1]_[+1]_
+                                           3_[+1]_[+1]_4
+chrIX_128421_128488_+_YI          0.00077  10_[+1]_39_[+1]_1
+chrXI_380835_380895_-_YK           0.0013  3_[+1]_6_[+1]_[+1]_[+1]_16
+chrXI_337236_337458_-_YK          0.00077  52_[+1]_15_[+1]_9_[+1]_9_[+1]_15_
+                                           [+1]_[+1]_12_[+1]_48
+chrIV_170454_170678_-_YD           0.0021  59_[+1]_9_[+1]_9_[+1]_9_[+1]_6_
+                                           [+1]_24_[+1]_6_[+1]_24_[+1]_7
+chrIV_110088_110464_+_YD           0.0025  18_[+1]_10_[+1]_17_[+1]_31_[+1]_
+                                           35_[+1]_31_[+1]_50_[+1]_73_[+1]_40
+chrIV_601132_601175_+_YD          0.00024  7_[+1]_15_[+1]_4
+chrXIV_25557_25676_+_YNL          0.00028  25_[+1]_42_[+1]_35
+chrXII_709016_709183_-_Y           0.0033  5_[+1]_9_[+1]_[+1]_6_[+1]_[+1]_
+                                           63_[+1]_31
+chrVII_88152_88274_+_YGL           0.0027  60_[+1]_6_[+1]_39
+chrIX_128703_128781_+_YI            0.003  1_[+1]_3_[+1]_3_[+1]_6_[+1]_30
+chrIV_601066_601110_+_YD           0.0011  7_[+1]_15_[+1]_5
+chrVII_876999_877145_-_Y           0.0023  4_[+1]_[+1]_3_[+1]_3_[+1]_15_[+1]_
+                                           6_[+1]_27_[+1]_26
+chrXII_877243_877374_-_Y          0.00054  13_[+1]_110
+chrIV_601290_601364_+_YD          0.00054  47_[+1]_19
+chrIV_601367_601517_+_YD          0.00065  15_[+1]_39_[+1]_[+1]_42_[+1]_19
+chrXI_337599_337658_-_YK          0.00065  48_[+1]_3
+chrVII_88287_88375_+_YGL          0.00065  39_[+1]_41
+chrVIII_386134_386221_+_          0.00065  67_[+1]_12
+chrVII_1049564_1049737_-           0.0038  5_[+1]_3_[+1]_3_[+1]_24_[+1]_3_
+                                           [+1]_9_[+1]_6_[+1]_12_[+1]_19_[+1]_9
+chrX_120653_120750_+_YJL          0.00077  49_[+1]_[+1]_18_[+1]_4
+chrXI_336885_336918_-_YK          0.00077  7_[+1]_18
+chrXII_806637_806693_+_Y          0.00091  11_[+1]_37
+chrV_140198_140287_-_YEL          0.00091  69_[+1]_12
+chrVII_89249_89345_+_YGL           0.0011  4_[+1]_84
+chrVII_519370_519734_+_Y            0.003  46_[+1]_99_[+1]_72_[+1]_33_[+1]_
+                                           24_[+1]_46
+chrXI_142296_142335_-_YK           0.0011  [+1]_31
+chrIV_601024_601045_+_YD           0.0011  7_[+1]_6
+chrXIV_434974_435049_+_Y           0.0013  17_[+1]_50
+chrXI_163645_163716_-_YK            0.004  28_[+1]_6_[+1]_20
+chrVII_379190_379241_+_Y           0.0015  42_[+1]_1
+chrVI_54084_54156_-_YFL0           0.0017  35_[+1]_29
+chrVII_876814_876882_-_Y           0.0017  20_[+1]_40
+chrXV_253155_253210_-_YO           0.0019  30_[+1]_17
+chrIX_128500_128539_+_YI           0.0025  6_[+1]_25
+chrIV_601249_601270_+_YD           0.0033  1_[+1]_12
+chrX_291690_291776_-_YJL           0.0041  31_[+1]_47
+chrI_72939_73020_+_YAL03           0.0041  51_[+1]_22
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF CWWCMWCWD width=9 seqs=142
+chrIII_57430_57531_-_YCL (   73) CATCCACTG  1 
+chrIV_721207_721281_-_YD (   24) CAACCACTG  1 
+chrXI_337505_337597_-_YK (   72) CAACCACAG  1 
+chrXI_337505_337597_-_YK (   54) CAACCACAG  1 
+chrXI_337505_337597_-_YK (   45) CAACCACAG  1 
+chrXI_337505_337597_-_YK (   36) CAACCACAG  1 
+chrXI_337505_337597_-_YK (   27) CAACCACAG  1 
+chrXI_337505_337597_-_YK (   18) CAACCACAG  1 
+chrXI_337505_337597_-_YK (    9) CAACCACAG  1 
+chrVII_1049847_1049888_- (   31) CTACCACTG  1 
+chrIX_128567_128627_+_YI (   24) CATCTACTG  1 
+chrXI_259335_259443_+_YK (   28) CTACCACTG  1 
+chrXV_798024_798074_+_YO (   14) CATCTACTG  1 
+chrXV_798024_798074_+_YO (   14) CATCTACTG  1 
+chrX_120557_120647_+_YJL (   68) CATCATCTG  1 
+chrVII_482594_482666_-_Y (   38) CATCTTCTG  1 
+chrIV_600931_600980_+_YD (    2) CATCTTCTG  1 
+chrXIII_879784_879987_-_ (  114) CATCTTCAG  1 
+chrXII_556266_556381_+_Y (   74) CAACAACAG  1 
+chrIX_128421_128488_+_YI (   59) CTGCCACTG  1 
+chrXI_380835_380895_-_YK (   37) CAACAACAG  1 
+chrXI_337236_337458_-_YK (   77) CAACAACAG  1 
+chrXI_337236_337458_-_YK (   53) CAACAACAG  1 
+chrIV_170454_170678_-_YD (  162) CAACAACAG  1 
+chrIV_110088_110464_+_YD (  104) CAACTTCTG  1 
+chrIV_601132_601175_+_YD (    8) CTTCTACTG  1 
+chrXIV_25557_25676_+_YNL (   26) CTTCATCTG  1 
+chrXII_709016_709183_-_Y (   48) CTTCATCTG  1 
+chrXII_709016_709183_-_Y (   33) CTTCATCTG  1 
+chrVII_88152_88274_+_YGL (   61) CTTCAACAG  1 
+chrIX_128703_128781_+_YI (   41) CTTCTTCTG  1 
+chrIV_601132_601175_+_YD (   32) CTACTACTG  1 
+chrIV_601066_601110_+_YD (   32) CTACTACTG  1 
+chrVII_876999_877145_-_Y (   14) CATCCACAT  1 
+chrXII_556266_556381_+_Y (  104) CAGCAACAG  1 
+chrXII_556266_556381_+_Y (   95) CAGCAACAG  1 
+chrXI_380835_380895_-_YK (   19) CTACAACAG  1 
+chrXI_337236_337458_-_YK (  146) CATCCACAA  1 
+chrXI_337236_337458_-_YK (  137) CAGCAACAG  1 
+chrXI_337236_337458_-_YK (   95) CAGCAACAG  1 
+chrVII_482594_482666_-_Y (   26) CATCCTCTT  1 
+chrVII_482594_482666_-_Y (   14) CATCCTCTT  1 
+chrIV_170454_170678_-_YD (  129) CATCCACAA  1 
+chrXIII_879784_879987_-_ (   96) CATCCTCAT  1 
+chrIV_170454_170678_-_YD (  210) CCTCCACAG  1 
+chrXII_877243_877374_-_Y (   14) CATCCTCAA  1 
+chrIV_601290_601364_+_YD (   48) CAACCACTT  1 
+chrIV_601367_601517_+_YD (  124) CAACCACTT  1 
+chrXI_337599_337658_-_YK (   49) CAACCACAA  1 
+chrXII_556266_556381_+_Y (   47) CAACCACAA  1 
+chrXII_556266_556381_+_Y (   17) CAACCACAA  1 
+chrXI_337505_337597_-_YK (   81) CAACCACAA  1 
+chrVII_88287_88375_+_YGL (   40) CAACCACAA  1 
+chrVIII_386134_386221_+_ (   68) CTTCCGCAG  1 
+chrXIII_879784_879987_-_ (  126) CATCCTCCG  1 
+chrXI_259335_259443_+_YK (   52) CCACCACTG  1 
+chrIV_601367_601517_+_YD (   64) CAACCACAT  1 
+chrIV_601367_601517_+_YD (   16) CAACCACAT  1 
+chrVII_876999_877145_-_Y (    5) CTTCCTCTT  1 
+chrX_120557_120647_+_YJL (   80) CCACCACAG  1 
+chrVII_1049564_1049737_- (  129) CTTCCTCTA  1 
+chrVII_1049564_1049737_- (  108) CTTCCTCTT  1 
+chrVII_1049564_1049737_- (   30) CTTCCTCTT  1 
+chrVII_1049564_1049737_- (   18) CTACCGCTG  1 
+chrVII_1049564_1049737_- (    6) CTGCTTCTG  1 
+chrXII_556266_556381_+_Y (   62) CAACCTCAT  1 
+chrIX_128421_128488_+_YI (   11) CATCTGCTG  1 
+chrX_120653_120750_+_YJL (   59) CTGCTTCTG  1 
+chrXI_336885_336918_-_YK (    8) CAACCTCAA  1 
+chrXI_337236_337458_-_YK (  167) CAACCTCAA  1 
+chrIX_128703_128781_+_YI (    2) CTTCCTCTT  1 
+chrIV_601367_601517_+_YD (   73) CAACCACCG  1 
+chrVII_876999_877145_-_Y (   62) CTTCCTCAT  1 
+chrXII_806637_806693_+_Y (   12) CTACCACTA  1 
+chrX_120653_120750_+_YJL (   50) CTACCACTA  1 
+chrXI_259335_259443_+_YK (   70) CTTCCACCG  1 
+chrV_140198_140287_-_YEL (   70) CATCTACTT  1 
+chrVII_876999_877145_-_Y (   26) CATCTTCTT  1 
+chrVII_89249_89345_+_YGL (    5) CATCATCTT  1 
+chrVII_519370_519734_+_Y (  311) CATCAACAT  1 
+chrIV_170454_170678_-_YD (   60) CATCAACAA  1 
+chrXI_142296_142335_-_YK (    1) CAACTGCTG  1 
+chrIV_601024_601045_+_YD (    8) CCTCTACTG  1 
+chrIV_601066_601110_+_YD (    8) CCTCTACTG  1 
+chrXI_380835_380895_-_YK (   28) CAACAGCAG  1 
+chrVII_519370_519734_+_Y (  278) CATCTTCAA  1 
+chrXIV_434974_435049_+_Y (   18) CATCATCAA  1 
+chrXI_259335_259443_+_YK (   37) CTACCACCG  1 
+chrXI_163645_163716_-_YK (   29) CTGCCGCTG  1 
+chrXII_709016_709183_-_Y (   24) CAGCCTCAA  1 
+chrIV_110088_110464_+_YD (   38) CCTCTTCTG  1 
+chrVII_379190_379241_+_Y (   43) CAACAACAA  1 
+chrXI_337505_337597_-_YK (   63) CAACAACAA  1 
+chrXI_380835_380895_-_YK (    4) CAACAACAT  1 
+chrXIV_25557_25676_+_YNL (   77) CATCATCCG  1 
+chrXI_337236_337458_-_YK (  113) CAACAACAA  1 
+chrXIII_879784_879987_-_ (  150) CAGCCTCCG  1 
+chrXIII_879784_879987_-_ (   23) CAACAACAA  1 
+chrXII_709016_709183_-_Y (   57) CTTCAACTT  1 
+chrVI_54084_54156_-_YFL0 (   36) CTTCTACAA  1 
+chrXIII_879784_879987_-_ (  135) CTTCATCTA  1 
+chrVII_876814_876882_-_Y (   21) CAACATCAA  1 
+chrXII_556266_556381_+_Y (   83) CAGCAGCAG  1 
+chrXV_253155_253210_-_YO (   31) CTACTACTT  1 
+chrVII_1049564_1049737_- (   93) CTACATCTA  1 
+chrIX_128567_128627_+_YI (   42) CTTCTTCCG  1 
+chrXIII_879784_879987_-_ (   57) CAGCATCTA  1 
+chrIV_170454_170678_-_YD (  114) CCTCCGCAG  1 
+chrIV_170454_170678_-_YD (   96) CAGCAACAA  1 
+chrIV_170454_170678_-_YD (   78) CAGCAACAA  1 
+chrVII_876999_877145_-_Y (  113) CCTCCTCTT  1 
+chrIV_110088_110464_+_YD (   64) CCTCCTCTA  1 
+chrIX_128703_128781_+_YI (   26) CCTCCTCTT  1 
+chrIX_128500_128539_+_YI (    7) CATCCTCCT  1 
+chrVII_519370_519734_+_Y (  155) CAGCTTCCG  1 
+chrVII_519370_519734_+_Y (   47) CCACCACTA  1 
+chrIV_170454_170678_-_YD (  177) CCTCCACCG  1 
+chrIV_110088_110464_+_YD (  148) CCTCCTCAA  1 
+chrIV_110088_110464_+_YD (  247) CCACCACAA  1 
+chrIV_110088_110464_+_YD (   19) CCACCTCTT  1 
+chrVII_88152_88274_+_YGL (   76) CAACCACCT  1 
+chrX_120557_120647_+_YJL (   20) CTTCCACCT  1 
+chrXII_709016_709183_-_Y (    6) CCACCTCAA  1 
+chrVII_519370_519734_+_Y (  236) CTGCTTCCG  1 
+chrIX_128703_128781_+_YI (   14) CTTCCTCCT  1 
+chrIII_57430_57531_-_YCL (   54) CCTCAACAA  1 
+chrIII_57430_57531_-_YCL (   42) CTACCACCT  1 
+chrIV_601249_601270_+_YD (    2) CTACCACCA  1 
+chrXII_709016_709183_-_Y (  129) CAACTGCAA  1 
+chrIV_110088_110464_+_YD (  329) CAACTGCAA  1 
+chrVII_1049564_1049737_- (   75) CAGCCTCCA  1 
+chrVII_1049564_1049737_- (   63) CTGCCGCAT  1 
+chrVII_876999_877145_-_Y (   77) CCACATCTA  1 
+chrX_120557_120647_+_YJL (   53) CCACTACAT  1 
+chrVII_1049564_1049737_- (  157) CAGCAGCTT  1 
+chrX_120653_120750_+_YJL (   86) CTGCCGCCG  1 
+chrXI_163645_163716_-_YK (   44) CCGCTGCTG  1 
+chrIV_110088_110464_+_YD (  188) CTACAGCAA  1 
+chrX_291690_291776_-_YJL (   32) CCGCAACTA  1 
+chrVII_876999_877145_-_Y (   38) CCGCTACTT  1 
+chrXIII_879784_879987_-_ (   81) CTTCATCCT  1 
+chrI_72939_73020_+_YAL03 (   52) CCACTTCCG  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 6.39102 E= 6.1e-026 
+ -1379    174  -1379  -1379 
+    87    -89  -1379     29 
+    54  -1379      0     76 
+ -1379    174  -1379  -1379 
+    -7     72  -1379    -10 
+    84  -1379    -62     60 
+ -1379    174  -1379  -1379 
+    61   -109  -1379     76 
+    -3  -1379    154     -1 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 142 E= 6.1e-026 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.542254  0.161972  0.000000  0.295775 
+ 0.429577  0.000000  0.161972  0.408451 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.281690  0.492958  0.000000  0.225352 
+ 0.528169  0.000000  0.105634  0.366197 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.450704  0.140845  0.000000  0.408451 
+ 0.288732  0.000000  0.471831  0.239437 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif CWWCMWCWD MEME-1 regular expression
+--------------------------------------------------------------------------------
+C[AT][AT]C[CAT][AT]C[AT][GAT]
+--------------------------------------------------------------------------------
+
+
+
+
+Time  7.07 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF GRTGRTGKT MEME-2	width =   9  sites =  12  llr = 122  E-value = 6.1e-002
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 Description
+--------------------------------------------------------------------------------
+Simplified        A  :31:61:::
+pos.-specific     C  :::::3:11
+probability       G  a7:94:a61
+matrix            T  ::91:7:38
+
+         bits    2.6 *     *  
+                 2.4 *     *  
+                 2.1 *  *  *  
+                 1.8 *  *  *  
+Relative         1.6 * **  *  
+Entropy          1.3 ****  * *
+(14.7 bits)      1.0 ***** ***
+                 0.8 *********
+                 0.5 *********
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           GGTGATGGT
+consensus             A  GC T 
+sequence                      
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrXII_499131_499177_+_Y     39  2.56e-07 GAGATTGAGA GGTGGTGGT           
+chrX_120653_120750_+_YJL     28  7.24e-07 TTCCCAAATT GGTGATGGT CAAGTCCAAG
+chrX_120557_120647_+_YJL      1  1.11e-06          . GGTGGTGTT ACCGACTACG
+chrXI_142296_142335_-_YK     27  3.17e-06 CTCTCAAATT GGTGACGGT CAAAT     
+chrIV_205929_206092_-_YD     65  1.01e-05 TACAGCGTAC GGTGGTGCT GATTATGGTG
+chrVIII_75628_75724_+_YH      1  1.01e-05          . GGTGAAGGT TCTAAGACTT
+chrXIV_434974_435049_+_Y     41  1.41e-05 CACTAACAAT GGAGATGGT GAGCACCTTG
+chrXII_815479_815524_+_Y     18  1.81e-05 AGATTCATTG GATGGCGTT GTTCACAATC
+chrXIII_879784_879987_-_    191  1.81e-05 TCCTTACAAT GATGATGGG TCCTG     
+chrVII_876814_876882_-_Y     11  1.86e-05 ACAAGATAAG GGTGGTGTC GCAACATCAA
+chrXII_369863_369925_-_Y     11  2.25e-05 CGTCACCGTC GATGACGTT ATCACTCAAT
+chrIV_205929_206092_-_YD     74  4.13e-05 CGGTGGTGCT GATTATGGT GAAGCCACGT
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrXII_499131_499177_+_Y          2.6e-07  38_[+2]
+chrX_120653_120750_+_YJL          7.2e-07  27_[+2]_62
+chrX_120557_120647_+_YJL          1.1e-06  [+2]_82
+chrXI_142296_142335_-_YK          3.2e-06  26_[+2]_5
+chrIV_205929_206092_-_YD          4.1e-05  64_[+2]_[+2]_82
+chrVIII_75628_75724_+_YH            1e-05  [+2]_88
+chrXIV_434974_435049_+_Y          1.4e-05  40_[+2]_27
+chrXII_815479_815524_+_Y          1.8e-05  17_[+2]_20
+chrXIII_879784_879987_-_          1.8e-05  190_[+2]_5
+chrVII_876814_876882_-_Y          1.9e-05  10_[+2]_50
+chrXII_369863_369925_-_Y          2.2e-05  10_[+2]_44
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF GRTGRTGKT width=9 seqs=12
+chrXII_499131_499177_+_Y (   39) GGTGGTGGT  1 
+chrX_120653_120750_+_YJL (   28) GGTGATGGT  1 
+chrX_120557_120647_+_YJL (    1) GGTGGTGTT  1 
+chrXI_142296_142335_-_YK (   27) GGTGACGGT  1 
+chrIV_205929_206092_-_YD (   65) GGTGGTGCT  1 
+chrVIII_75628_75724_+_YH (    1) GGTGAAGGT  1 
+chrXIV_434974_435049_+_Y (   41) GGAGATGGT  1 
+chrXII_815479_815524_+_Y (   18) GATGGCGTT  1 
+chrXIII_879784_879987_-_ (  191) GATGATGGG  1 
+chrVII_876814_876882_-_Y (   11) GGTGGTGTC  1 
+chrXII_369863_369925_-_Y (   11) GATGACGTT  1 
+chrIV_205929_206092_-_YD (   74) GATTATGGT  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 10.722 E= 6.1e-002 
+ -1023  -1023    262  -1023 
+    17  -1023    204  -1023 
+  -182  -1023  -1023    192 
+ -1023  -1023    249   -154 
+    98  -1023    136  -1023 
+  -182    -26  -1023    146 
+ -1023  -1023    262  -1023 
+ -1023   -184    184     46 
+ -1023   -184    -96    178 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 12 E= 6.1e-002 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.333333  0.000000  0.666667  0.000000 
+ 0.083333  0.000000  0.000000  0.916667 
+ 0.000000  0.000000  0.916667  0.083333 
+ 0.583333  0.000000  0.416667  0.000000 
+ 0.083333  0.250000  0.000000  0.666667 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.083333  0.583333  0.333333 
+ 0.000000  0.083333  0.083333  0.833333 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GRTGRTGKT MEME-2 regular expression
+--------------------------------------------------------------------------------
+G[GA]TG[AG][TC]G[GT]T
+--------------------------------------------------------------------------------
+
+
+
+
+Time  9.77 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF TCGCYGCTG MEME-3	width =   9  sites =  15  llr = 143  E-value = 3.7e-002
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 Description
+--------------------------------------------------------------------------------
+Simplified        A  1::::11::
+pos.-specific     C  :9:87:9::
+probability       G  1:81:9::a
+matrix            T  712131:a:
+
+         bits    2.6         *
+                 2.4         *
+                 2.1        **
+                 1.8   *  * **
+Relative         1.6   *  * **
+Entropy          1.3  **  ****
+(13.7 bits)      1.0 *********
+                 0.8 *********
+                 0.5 *********
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           TCGCCGCTG
+consensus              T T    
+sequence                      
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrXII_370046_370085_-_Y     22  2.02e-06 ATCGCCGCTG TCGCCGCTG TCGCTTCTGC
+chrXII_370046_370085_-_Y     13  2.02e-06 GTCGCTTCTA TCGCCGCTG TCGCCGCTGT
+chrXII_232773_232819_-_Y     18  3.64e-06 GGTGCTGCTT TCGCTGCTG AAGAAATTGA
+chrI_72939_73020_+_YAL03      7  3.64e-06     CCGCTG TCGCTGCTG TTTTCGAACA
+chrXIV_27078_27117_+_YNL     29  4.99e-06 ACATACTCGG GCGCCGCTG GTC       
+chrIV_1489753_1489789_-_      8  6.62e-06    AAGACCA TCGTCGCTG CCTTCGCTAC
+chrIV_1489753_1489789_-_     29  8.25e-06 TTCGCTACTG TTGCCGCTG           
+chrI_72140_72211_+_YAL03     56  1.23e-05 ACCAAGGTCA TCTCCGCTG GTAGAATC  
+chrVII_379190_379241_+_Y     22  1.59e-05 CACAGGTCTC ACGCCGCTG GAGATACAAT
+chrXII_370046_370085_-_Y     31  4.70e-05 GTCGCCGCTG TCGCTTCTG C         
+chrV_86217_86256_+_YEL03     12  4.70e-05 CATCATGTAC TCTTCGCTG AACCGGGTTT
+chrIV_1489753_1489789_-_     20  5.89e-05 GTCGCTGCCT TCGCTACTG TTGCCGCTG 
+chrVII_1049564_1049737_-     84  5.89e-05 CCAGCCTCCA GCTCTGCTG CTACATCTAC
+chrIX_128421_128488_+_YI     47  5.89e-05 AAAATCTCTG ATGCCGCTG CATCTGCCAC
+chrIII_57430_57531_-_YCL     10  1.03e-04  AAGAACTGG TCGGCGATG CATTGGACCA
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrXII_370046_370085_-_Y          4.7e-05  12_[+3]_[+3]_[+3]_1
+chrXII_232773_232819_-_Y          3.6e-06  17_[+3]_21
+chrI_72939_73020_+_YAL03          3.6e-06  6_[+3]_67
+chrXIV_27078_27117_+_YNL            5e-06  28_[+3]_3
+chrIV_1489753_1489789_-_          5.9e-05  7_[+3]_3_[+3]_[+3]
+chrI_72140_72211_+_YAL03          1.2e-05  55_[+3]_8
+chrVII_379190_379241_+_Y          1.6e-05  21_[+3]_22
+chrV_86217_86256_+_YEL03          4.7e-05  11_[+3]_20
+chrVII_1049564_1049737_-          5.9e-05  83_[+3]_82
+chrIX_128421_128488_+_YI          5.9e-05  46_[+3]_13
+chrIII_57430_57531_-_YCL           0.0001  9_[+3]_84
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF TCGCYGCTG width=9 seqs=15
+chrXII_370046_370085_-_Y (   22) TCGCCGCTG  1 
+chrXII_370046_370085_-_Y (   13) TCGCCGCTG  1 
+chrXII_232773_232819_-_Y (   18) TCGCTGCTG  1 
+chrI_72939_73020_+_YAL03 (    7) TCGCTGCTG  1 
+chrXIV_27078_27117_+_YNL (   29) GCGCCGCTG  1 
+chrIV_1489753_1489789_-_ (    8) TCGTCGCTG  1 
+chrIV_1489753_1489789_-_ (   29) TTGCCGCTG  1 
+chrI_72140_72211_+_YAL03 (   56) TCTCCGCTG  1 
+chrVII_379190_379241_+_Y (   22) ACGCCGCTG  1 
+chrXII_370046_370085_-_Y (   31) TCGCTTCTG  1 
+chrV_86217_86256_+_YEL03 (   12) TCTTCGCTG  1 
+chrIV_1489753_1489789_-_ (   20) TCGCTACTG  1 
+chrVII_1049564_1049737_- (   84) GCTCTGCTG  1 
+chrIX_128421_128488_+_YI (   47) ATGCCGCTG  1 
+chrIII_57430_57531_-_YCL (   10) TCGGCGATG  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 9.48814 E= 3.7e-002 
+  -115  -1055    -29    160 
+ -1055    153  -1055    -86 
+ -1055  -1055    230    -27 
+ -1055    142   -128    -86 
+ -1055    115  -1055     46 
+  -215  -1055    241   -186 
+  -215    164  -1055  -1055 
+ -1055  -1055  -1055    205 
+ -1055  -1055    262  -1055 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 15 E= 3.7e-002 
+ 0.133333  0.000000  0.133333  0.733333 
+ 0.000000  0.866667  0.000000  0.133333 
+ 0.000000  0.000000  0.800000  0.200000 
+ 0.000000  0.800000  0.066667  0.133333 
+ 0.000000  0.666667  0.000000  0.333333 
+ 0.066667  0.000000  0.866667  0.066667 
+ 0.066667  0.933333  0.000000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TCGCYGCTG MEME-3 regular expression
+--------------------------------------------------------------------------------
+TC[GT]C[CT]GCTG
+--------------------------------------------------------------------------------
+
+
+
+
+Time 12.37 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF GTCASTGA MEME-4	width =   8  sites =   8  llr = 81  E-value = 6.9e+001
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 Description
+--------------------------------------------------------------------------------
+Simplified        A  3::a:::a
+pos.-specific     C  ::a:6:::
+probability       G  8:::4:a:
+matrix            T  :a:::a::
+
+         bits    2.6       * 
+                 2.4       * 
+                 2.1  *   ** 
+                 1.8  *** ***
+Relative         1.6 **** ***
+Entropy          1.3 **** ***
+(14.7 bits)      1.0 ********
+                 0.8 ********
+                 0.5 ********
+                 0.3 ********
+                 0.0 --------
+
+Multilevel           GTCACTGA
+consensus            A   G   
+sequence                     
+                             
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site
+-------------             ----- ---------            --------
+chrVII_88287_88375_+_YGL     73  6.54e-06 AAATGGGGGC GTCAGTGA GAACTTGGA 
+chrXV_798024_798074_+_YO     31  6.54e-06 TGCAGCAAGT GTCAGTGA CGAAGATTCA
+chrXV_798024_798074_+_YO     31  6.54e-06 TGCAGCAAGT GTCAGTGA CGAAGATTCA
+chrIV_601290_601364_+_YD     17  1.87e-05 CTACACTGTA GTCACTGA ATATACTACT
+chrIV_601367_601517_+_YD     93  1.87e-05 ATACACTGTA GTCACTGA GTACACTACT
+chrIV_601367_601517_+_YD      6  1.87e-05      ACACC GTCACTGA ACCAACCACA
+chrXI_259335_259443_+_YK      3  5.28e-05         AA ATCACTGA CGGTCAAATC
+chrIV_601367_601517_+_YD     30  5.28e-05 CACATTGACT ATCACTGA CTGTCCATGC
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrVII_88287_88375_+_YGL          6.5e-06  72_[+4]_9
+chrXV_798024_798074_+_YO          6.5e-06  30_[+4]_13
+chrXV_798024_798074_+_YO          6.5e-06  30_[+4]_13
+chrIV_601290_601364_+_YD          1.9e-05  16_[+4]_51
+chrIV_601367_601517_+_YD          1.9e-05  5_[+4]_16_[+4]_55_[+4]_51
+chrXI_259335_259443_+_YK          5.3e-05  2_[+4]_99
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF GTCASTGA width=8 seqs=8
+chrVII_88287_88375_+_YGL (   73) GTCAGTGA  1 
+chrXV_798024_798074_+_YO (   31) GTCAGTGA  1 
+chrXV_798024_798074_+_YO (   31) GTCAGTGA  1 
+chrIV_601290_601364_+_YD (   17) GTCACTGA  1 
+chrIV_601367_601517_+_YD (   93) GTCACTGA  1 
+chrIV_601367_601517_+_YD (    6) GTCACTGA  1 
+chrXI_259335_259443_+_YK (    3) ATCACTGA  1 
+chrIV_601367_601517_+_YD (   30) ATCACTGA  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 8 n= 6851 bayes= 9.74041 E= 6.9e+001 
+   -24   -965    221   -965 
+  -965   -965   -965    205 
+  -965    174   -965   -965 
+   176   -965   -965   -965 
+  -965    106    121   -965 
+  -965   -965   -965    205 
+  -965   -965    262   -965 
+   176   -965   -965   -965 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 8 nsites= 8 E= 6.9e+001 
+ 0.250000  0.000000  0.750000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  1.000000  0.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.000000  0.625000  0.375000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GTCASTGA MEME-4 regular expression
+--------------------------------------------------------------------------------
+[GA]TCA[CG]TGA
+--------------------------------------------------------------------------------
+
+
+
+
+Time 14.94 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF GGCTGGARG MEME-5	width =   9  sites =   3  llr = 41  E-value = 1.4e+002
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 Description
+--------------------------------------------------------------------------------
+Simplified        A  ::::::a7:
+pos.-specific     C  ::a::::::
+probability       G  aa::aa:3a
+matrix            T  :::a:::::
+
+         bits    2.6 **  **  *
+                 2.4 **  **  *
+                 2.1 ** ***  *
+                 1.8 ******* *
+Relative         1.6 ******* *
+Entropy          1.3 ******* *
+(19.8 bits)      1.0 *********
+                 0.8 *********
+                 0.5 *********
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           GGCTGGAAG
+consensus                   G 
+sequence                      
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrVII_89249_89345_+_YGL     14  7.10e-07 TCATCATCTT GGCTGGAAG TCAATGGATG
+chrXII_462543_462578_-_Y      3  7.10e-07         AT GGCTGGAAG AGGCCAGCAC
+chrIV_205929_206092_-_YD     43  1.10e-06 ATGACGCTAT GGCTGGAGG ATTTACAGCG
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrVII_89249_89345_+_YGL          7.1e-07  13_[+5]_75
+chrXII_462543_462578_-_Y          7.1e-07  2_[+5]_25
+chrIV_205929_206092_-_YD          1.1e-06  42_[+5]_113
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF GGCTGGARG width=9 seqs=3
+chrVII_89249_89345_+_YGL (   14) GGCTGGAAG  1 
+chrXII_462543_462578_-_Y (    3) GGCTGGAAG  1 
+chrIV_205929_206092_-_YD (   43) GGCTGGAGG  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 10.796 E= 1.4e+002 
+  -823   -823    262   -823 
+  -823   -823    262   -823 
+  -823    173   -823   -823 
+  -823   -823   -823    204 
+  -823   -823    262   -823 
+  -823   -823    262   -823 
+   175   -823   -823   -823 
+   117   -823    103   -823 
+  -823   -823    262   -823 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 3 E= 1.4e+002 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.666667  0.000000  0.333333  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GGCTGGARG MEME-5 regular expression
+--------------------------------------------------------------------------------
+GGCTGGA[AG]G
+--------------------------------------------------------------------------------
+
+
+
+
+Time 17.42 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF GAAGAA MEME-6	width =   6  sites =  11  llr = 94  E-value = 8.2e+002
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 Description
+--------------------------------------------------------------------------------
+Simplified        A  :aa:aa
+pos.-specific     C  ::::::
+probability       G  a::a::
+matrix            T  ::::::
+
+         bits    2.6 *  *  
+                 2.4 *  *  
+                 2.1 *  *  
+                 1.8 ******
+Relative         1.6 ******
+Entropy          1.3 ******
+(12.3 bits)      1.0 ******
+                 0.8 ******
+                 0.5 ******
+                 0.3 ******
+                 0.0 ------
+
+Multilevel           GAAGAA
+consensus                  
+sequence                   
+                           
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value             Site 
+-------------             ----- ---------            ------
+chrIX_128567_128627_+_YI      8  2.01e-04    ATCTAGT GAAGAA GCTGCTCCAA
+chrI_71966_72005_+_YAL03     31  2.01e-04 CAGAAAGTCC GAAGAA TTGT      
+chrXI_337236_337458_-_YK     23  2.01e-04 TCAAGCCCAA GAAGAA CAATTATCTC
+chrX_651943_652003_+_YJR     49  2.01e-04 TCCAATTCCA GAAGAA GTCCAAC   
+chrX_651943_652003_+_YJR     10  2.01e-04  GAAGTTGTT GAAGAA TTCACCCCAG
+chrVI_54084_54156_-_YFL0     64  2.01e-04 AGTTGCCCCA GAAGAA CACC      
+chrXIV_434974_435049_+_Y     66  2.01e-04 CTTGGGATCC GAAGAA ACGGA     
+chrXI_327028_327077_-_YK     44  2.01e-04 AGAAACCGAT GAAGAA A         
+chrXI_327028_327077_-_YK     32  2.01e-04 GGATTTGTCT GAAGAA ACCGATGAAG
+chrX_76390_76459_+_YJL18     63  2.01e-04 AGAAACTGGA GAAGAA CC        
+chrX_76390_76459_+_YJL18     51  2.01e-04 AACGCTAAGA GAAGAA ACTGGAGAAG
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrIX_128567_128627_+_YI           0.0002  7_[+6]_48
+chrI_71966_72005_+_YAL03           0.0002  30_[+6]_4
+chrXI_337236_337458_-_YK           0.0002  22_[+6]_195
+chrX_651943_652003_+_YJR           0.0002  9_[+6]_33_[+6]_7
+chrVI_54084_54156_-_YFL0           0.0002  63_[+6]_4
+chrXIV_434974_435049_+_Y           0.0002  65_[+6]_5
+chrXI_327028_327077_-_YK           0.0002  31_[+6]_6_[+6]_1
+chrX_76390_76459_+_YJL18           0.0002  50_[+6]_6_[+6]_2
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF GAAGAA width=6 seqs=11
+chrIX_128567_128627_+_YI (    8) GAAGAA  1 
+chrI_71966_72005_+_YAL03 (   31) GAAGAA  1 
+chrXI_337236_337458_-_YK (   23) GAAGAA  1 
+chrX_651943_652003_+_YJR (   49) GAAGAA  1 
+chrX_651943_652003_+_YJR (   10) GAAGAA  1 
+chrVI_54084_54156_-_YFL0 (   64) GAAGAA  1 
+chrXIV_434974_435049_+_Y (   66) GAAGAA  1 
+chrXI_327028_327077_-_YK (   44) GAAGAA  1 
+chrXI_327028_327077_-_YK (   32) GAAGAA  1 
+chrX_76390_76459_+_YJL18 (   63) GAAGAA  1 
+chrX_76390_76459_+_YJL18 (   51) GAAGAA  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 6 n= 7033 bayes= 8.86995 E= 8.2e+002 
+ -1010  -1010    262  -1010 
+   176  -1010  -1010  -1010 
+   176  -1010  -1010  -1010 
+ -1010  -1010    262  -1010 
+   176  -1010  -1010  -1010 
+   176  -1010  -1010  -1010 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 6 nsites= 11 E= 8.2e+002 
+ 0.000000  0.000000  1.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif GAAGAA MEME-6 regular expression
+--------------------------------------------------------------------------------
+GAAGAA
+--------------------------------------------------------------------------------
+
+
+
+
+Time 19.98 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF ACRTCWCCA MEME-7	width =   9  sites =  15  llr = 133  E-value = 1.7e+003
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 Description
+--------------------------------------------------------------------------------
+Simplified        A  a:5::5::7
+pos.-specific     C  :a::9:aa:
+probability       G  ::4:11:::
+matrix            T  ::1a:4::3
+
+         bits    2.6          
+                 2.4          
+                 2.1    *     
+                 1.8 ** *  ** 
+Relative         1.6 ** ** ** 
+Entropy          1.3 ** ** ** 
+(12.8 bits)      1.0 ** ** ***
+                 0.8 *********
+                 0.5 *********
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           ACATCACCA
+consensus              G  T  T
+sequence                      
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrIV_205929_206092_-_YD     89  1.50e-05 TGGTGAAGCC ACGTCTCCA TTTGGTGCTT
+chrIV_205386_205677_-_YD     85  1.50e-05 TTACAGCCCA ACGTCTCCA GCCTATTCCC
+chrIV_205386_205677_-_YD     64  1.50e-05 TTACAGCCCA ACGTCACCA AGTTACAGCC
+chrIV_205386_205677_-_YD     43  1.50e-05 ATACTCTCCT ACGTCACCA AGTTACAGCC
+chrIV_205386_205677_-_YD    232  4.23e-05 TTACTCCCCA ACATCTCCA GGCTACAGCC
+chrIV_205386_205677_-_YD    148  4.23e-05 ATACTCTCCA ACATCACCA TCCTATTCCC
+chrIV_205386_205677_-_YD    106  4.23e-05 CTATTCCCCA ACATCACCA AGTTATAGTC
+chrIV_205386_205677_-_YD     22  4.23e-05 TTATTCTCCT ACATCTCCA TCATACTCTC
+chrI_72140_72211_+_YAL03     41  4.23e-05 GACTACAAGA ACATCACCA AGGTCATCTC
+chrIV_205386_205677_-_YD      1  5.46e-05          . ACGTCTCCT TCTTATTCTC
+chrIV_205386_205677_-_YD    169  7.69e-05 CTATTCCCCA ACATCACCT TCTTACTCTC
+chrIV_721207_721281_-_YD     50  1.04e-04 AAAGAATACC ACTTCTCCA GCTCCAACTG
+chrVII_876814_876882_-_Y     36  1.20e-04 TCAAGTAATG ACGTGACCA GTTCTACTAC
+chrIV_205386_205677_-_YD    211  1.42e-04 CTATAGCCCT ACTTCACCT TCTTACTCCC
+chrIV_205386_205677_-_YD    127  1.64e-04 TTATAGTCCT ACATCGCCT TCATACTCTC
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrIV_205929_206092_-_YD          1.5e-05  88_[+7]_67
+chrIV_205386_205677_-_YD          0.00014  [+7]_12_[+7]_12_[+7]_12_[+7]_12_
+                                           [+7]_12_[+7]_12_[+7]_12_[+7]_12_
+                                           [+7]_33_[+7]_12_[+7]_52
+chrI_72140_72211_+_YAL03          4.2e-05  40_[+7]_23
+chrIV_721207_721281_-_YD           0.0001  49_[+7]_17
+chrVII_876814_876882_-_Y          0.00012  35_[+7]_25
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF ACRTCWCCA width=9 seqs=15
+chrIV_205929_206092_-_YD (   89) ACGTCTCCA  1 
+chrIV_205386_205677_-_YD (   85) ACGTCTCCA  1 
+chrIV_205386_205677_-_YD (   64) ACGTCACCA  1 
+chrIV_205386_205677_-_YD (   43) ACGTCACCA  1 
+chrIV_205386_205677_-_YD (  232) ACATCTCCA  1 
+chrIV_205386_205677_-_YD (  148) ACATCACCA  1 
+chrIV_205386_205677_-_YD (  106) ACATCACCA  1 
+chrIV_205386_205677_-_YD (   22) ACATCTCCA  1 
+chrI_72140_72211_+_YAL03 (   41) ACATCACCA  1 
+chrIV_205386_205677_-_YD (    1) ACGTCTCCT  1 
+chrIV_205386_205677_-_YD (  169) ACATCACCT  1 
+chrIV_721207_721281_-_YD (   50) ACTTCTCCA  1 
+chrVII_876814_876882_-_Y (   36) ACGTGACCA  1 
+chrIV_205386_205677_-_YD (  211) ACTTCACCT  1 
+chrIV_205386_205677_-_YD (  127) ACATCGCCT  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 8.73758 E= 1.7e+003 
+   176  -1055  -1055  -1055 
+ -1055    174  -1055  -1055 
+    66  -1055    130    -86 
+ -1055  -1055  -1055    205 
+ -1055    164   -128  -1055 
+    85  -1055   -128     73 
+ -1055    174  -1055  -1055 
+ -1055    174  -1055  -1055 
+   131  -1055  -1055     14 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 15 E= 1.7e+003 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.466667  0.000000  0.400000  0.133333 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.933333  0.066667  0.000000 
+ 0.533333  0.000000  0.066667  0.400000 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.000000  1.000000  0.000000  0.000000 
+ 0.733333  0.000000  0.000000  0.266667 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACRTCWCCA MEME-7 regular expression
+--------------------------------------------------------------------------------
+AC[AG]TC[AT]CC[AT]
+--------------------------------------------------------------------------------
+
+
+
+
+Time 22.52 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF ACGGTAAGA MEME-8	width =   9  sites =   5  llr = 57  E-value = 1.9e+003
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 Description
+--------------------------------------------------------------------------------
+Simplified        A  a2:::aa:8
+pos.-specific     C  :8:::::::
+probability       G  ::a8:::a:
+matrix            T  :::2a:::2
+
+         bits    2.6   *    * 
+                 2.4   *    * 
+                 2.1   * *  * 
+                 1.8 * ****** 
+Relative         1.6 * ****** 
+Entropy          1.3 * ****** 
+(16.5 bits)      1.0 *********
+                 0.8 *********
+                 0.5 *********
+                 0.3 *********
+                 0.0 ---------
+
+Multilevel           ACGGTAAGA
+consensus             A T    T
+sequence                      
+                              
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site 
+-------------             ----- ---------            ---------
+chrIV_601290_601364_+_YD     66  2.37e-06 TTCACCACAA ACGGTAAGA C         
+chrIV_601367_601517_+_YD    142  2.37e-06 TTCACCACAA ACGGTAAGA C         
+chrXV_160537_160614_-_YO     67  4.31e-06 TACGAATCCC ACGGTAAGT TGG       
+chrXI_163645_163716_-_YK     62  6.64e-06 GTTGCCAACC AAGGTAAGA AA        
+chrXI_552213_552259_+_YK     24  1.02e-05 GGTCTTACTC ACGTTAAGA GAAAAGAAAA
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrIV_601290_601364_+_YD          2.4e-06  65_[+8]_1
+chrIV_601367_601517_+_YD          2.4e-06  141_[+8]_1
+chrXV_160537_160614_-_YO          4.3e-06  66_[+8]_3
+chrXI_163645_163716_-_YK          6.6e-06  61_[+8]_2
+chrXI_552213_552259_+_YK            1e-05  23_[+8]_15
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF ACGGTAAGA width=9 seqs=5
+chrIV_601290_601364_+_YD (   66) ACGGTAAGA  1 
+chrIV_601367_601517_+_YD (  142) ACGGTAAGA  1 
+chrXV_160537_160614_-_YO (   67) ACGGTAAGT  1 
+chrXI_163645_163716_-_YK (   62) AAGGTAAGA  1 
+chrXI_552213_552259_+_YK (   24) ACGTTAAGA  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 9 n= 6760 bayes= 9.8337 E= 1.9e+003 
+   176   -897   -897   -897 
+   -56    141   -897   -897 
+  -897   -897    262   -897 
+  -897   -897    230    -27 
+  -897   -897   -897    205 
+   176   -897   -897   -897 
+   176   -897   -897   -897 
+  -897   -897    262   -897 
+   143   -897   -897    -27 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 9 nsites= 5 E= 1.9e+003 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.200000  0.800000  0.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  0.800000  0.200000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.800000  0.000000  0.000000  0.200000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif ACGGTAAGA MEME-8 regular expression
+--------------------------------------------------------------------------------
+A[CA]G[GT]TAAG[AT]
+--------------------------------------------------------------------------------
+
+
+
+
+Time 24.99 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF TTGGTT MEME-9	width =   6  sites =   6  llr = 56  E-value = 6.4e+002
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 Description
+--------------------------------------------------------------------------------
+Simplified        A  ::::::
+pos.-specific     C  ::::::
+probability       G  ::aa::
+matrix            T  aa::aa
+
+         bits    2.6   **  
+                 2.4   **  
+                 2.1 ******
+                 1.8 ******
+Relative         1.6 ******
+Entropy          1.3 ******
+(13.4 bits)      1.0 ******
+                 0.8 ******
+                 0.5 ******
+                 0.3 ******
+                 0.0 ------
+
+Multilevel           TTGGTT
+consensus                  
+sequence                   
+                           
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value             Site 
+-------------             ----- ---------            ------
+chrXII_806637_806693_+_Y     37  9.00e-05 AATTGAAGAT TTGGTT GACAGAATTG
+chrXII_709431_709491_-_Y     39  9.00e-05 ATTGGGATAC TTGGTT AACCTATGCT
+chrXII_369931_369971_-_Y     30  9.00e-05 CTCCCCAGCT TTGGTT TCCACC    
+chrXIII_879784_879987_-_     69  9.00e-05 GCATCTACGG TTGGTT CTTCGACTTC
+chrIV_110088_110464_+_YD     97  9.00e-05 AGTCCCATCC TTGGTT GCAACTTCTG
+chrI_72939_73020_+_YAL03     75  9.00e-05 CACCCCAAGA TTGGTT TC        
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrXII_806637_806693_+_Y            9e-05  36_[+9]_15
+chrXII_709431_709491_-_Y            9e-05  38_[+9]_17
+chrXII_369931_369971_-_Y            9e-05  29_[+9]_6
+chrXIII_879784_879987_-_            9e-05  68_[+9]_130
+chrIV_110088_110464_+_YD            9e-05  96_[+9]_275
+chrI_72939_73020_+_YAL03            9e-05  74_[+9]_2
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF TTGGTT width=6 seqs=6
+chrXII_806637_806693_+_Y (   37) TTGGTT  1 
+chrXII_709431_709491_-_Y (   39) TTGGTT  1 
+chrXII_369931_369971_-_Y (   30) TTGGTT  1 
+chrXIII_879784_879987_-_ (   69) TTGGTT  1 
+chrIV_110088_110464_+_YD (   97) TTGGTT  1 
+chrI_72939_73020_+_YAL03 (   75) TTGGTT  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 6 n= 7033 bayes= 9.85237 E= 6.4e+002 
+  -923   -923   -923    205 
+  -923   -923   -923    205 
+  -923   -923    262   -923 
+  -923   -923    262   -923 
+  -923   -923   -923    205 
+  -923   -923   -923    205 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 6 nsites= 6 E= 6.4e+002 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TTGGTT MEME-9 regular expression
+--------------------------------------------------------------------------------
+TTGGTT
+--------------------------------------------------------------------------------
+
+
+
+
+Time 27.33 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+MOTIF TGATTYGG MEME-10	width =   8  sites =   4  llr = 44  E-value = 4.2e+003
+********************************************************************************
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 Description
+--------------------------------------------------------------------------------
+Simplified        A  ::a:::::
+pos.-specific     C  :::::5::
+probability       G  3a::::aa
+matrix            T  8::aa5::
+
+         bits    2.6  *    **
+                 2.4  *    **
+                 2.1  * ** **
+                 1.8  **** **
+Relative         1.6  **** **
+Entropy          1.3 ***** **
+(16.0 bits)      1.0 ***** **
+                 0.8 ********
+                 0.5 ********
+                 0.3 ********
+                 0.0 --------
+
+Multilevel           TGATTCGG
+consensus            G    T  
+sequence                     
+                             
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 sites sorted by position p-value
+--------------------------------------------------------------------------------
+Sequence name             Start   P-value              Site
+-------------             ----- ---------            --------
+chrIX_128703_128781_+_YI     69  4.32e-06 GTATCTACGG TGATTTGG CCG       
+chrVII_88287_88375_+_YGL     20  9.67e-06 CCTGTTCAAA TGATTCGG GATGGACAAC
+chrIV_205929_206092_-_YD     19  9.67e-06 CACCTCTGGT TGATTCGG GTTCAAATGA
+chrIV_205929_206092_-_YD    131  1.26e-05 TACATCTCCC GGATTTGG AGTCTCCTCA
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 block diagrams
+--------------------------------------------------------------------------------
+SEQUENCE NAME            POSITION P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrIX_128703_128781_+_YI          4.3e-06  68_[+10]_3
+chrVII_88287_88375_+_YGL          9.7e-06  19_[+10]_62
+chrIV_205929_206092_-_YD          1.3e-05  18_[+10]_104_[+10]_26
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 in BLOCKS format
+--------------------------------------------------------------------------------
+BL   MOTIF TGATTYGG width=8 seqs=4
+chrIX_128703_128781_+_YI (   69) TGATTTGG  1 
+chrVII_88287_88375_+_YGL (   20) TGATTCGG  1 
+chrIV_205929_206092_-_YD (   19) TGATTCGG  1 
+chrIV_205929_206092_-_YD (  131) GGATTTGG  1 
+//
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 position-specific scoring matrix
+--------------------------------------------------------------------------------
+log-odds matrix: alength= 4 w= 8 n= 6851 bayes= 10.7413 E= 4.2e+003 
+  -865   -865     62    163 
+  -865   -865    262   -865 
+   175   -865   -865   -865 
+  -865   -865   -865    204 
+  -865   -865   -865    204 
+  -865     74   -865    105 
+  -865   -865    262   -865 
+  -865   -865    262   -865 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 position-specific probability matrix
+--------------------------------------------------------------------------------
+letter-probability matrix: alength= 4 w= 8 nsites= 4 E= 4.2e+003 
+ 0.000000  0.000000  0.250000  0.750000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 1.000000  0.000000  0.000000  0.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.000000  0.000000  1.000000 
+ 0.000000  0.500000  0.000000  0.500000 
+ 0.000000  0.000000  1.000000  0.000000 
+ 0.000000  0.000000  1.000000  0.000000 
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+	Motif TGATTYGG MEME-10 regular expression
+--------------------------------------------------------------------------------
+[TG]GATT[CT]GG
+--------------------------------------------------------------------------------
+
+
+
+
+Time 29.67 secs.
+
+********************************************************************************
+
+
+********************************************************************************
+SUMMARY OF MOTIFS
+********************************************************************************
+
+--------------------------------------------------------------------------------
+	Combined block diagrams: non-overlapping sites with p-value < 0.0001
+--------------------------------------------------------------------------------
+SEQUENCE NAME            COMBINED P-VALUE  MOTIF DIAGRAM
+-------------            ----------------  -------------
+chrV_140198_140287_-_YEL         8.80e-01  90
+chrV_86217_86256_+_YEL03         9.84e-03  11_[+3(4.70e-05)]_20
+chrIV_601367_601517_+_YD         1.08e-02  5_[+4(1.87e-05)]_16_[+4(5.28e-05)]_\
+    55_[+4(1.87e-05)]_41_[+8(2.37e-06)]_1
+chrIV_1017210_1017265_-_         2.44e-01  56
+chrIV_600931_600980_+_YD         4.55e-02  50
+chrIX_128703_128781_+_YI         6.05e-04  68_[+10(4.32e-06)]_3
+chrIV_601290_601364_+_YD         1.12e-03  16_[+4(1.87e-05)]_41_[+8(2.37e-06)]_\
+    1
+chrI_72140_72211_+_YAL03         1.04e-04  40_[+7(4.23e-05)]_6_[+3(1.23e-05)]_\
+    8
+chrIV_205386_205677_-_YD         7.50e-01  [+7(5.46e-05)]_12_[+7(4.23e-05)]_12_\
+    [+7(1.50e-05)]_12_[+7(1.50e-05)]_12_[+7(1.50e-05)]_12_[+7(4.23e-05)]_33_\
+    [+7(4.23e-05)]_12_[+7(7.69e-05)]_54_[+7(4.23e-05)]_52
+chrVII_88152_88274_+_YGL         4.02e-01  123
+chrXVI_462476_462541_-_Y         4.96e-01  66
+chrIV_601066_601110_+_YD         8.63e-02  45
+chrXII_369863_369925_-_Y         1.19e-02  10_[+2(2.25e-05)]_44
+chrIV_601132_601175_+_YD         4.93e-02  44
+chrXV_798024_798074_+_YO         5.71e-04  30_[+4(6.54e-06)]_13
+chrXV_798024_798074_+_YO         5.71e-04  30_[+4(6.54e-06)]_13
+chrI_72939_73020_+_YAL03         5.36e-04  6_[+3(3.64e-06)]_59_[+9(9.00e-05)]_\
+    2
+chrIV_110088_110464_+_YD         1.43e-01  96_[+9(9.00e-05)]_275
+chrXII_462543_462578_-_Y         6.22e-05  2_[+5(7.10e-07)]_25
+chrXII_709016_709183_-_Y         7.10e-01  168
+chrXVI_303199_303245_+_Y         1.74e-01  47
+chrXII_877243_877374_-_Y         1.59e-01  132
+chrVIII_75628_75724_+_YH         8.21e-03  [+2(1.01e-05)]_88
+chrXVI_462381_462471_-_Y         1.00e+00  91
+chrX_76390_76459_+_YJL18         2.76e-02  41_[+8(6.13e-05)]_20
+chrIV_601249_601270_+_YD         7.46e-01  22
+chrXI_163645_163716_-_YK         2.52e-04  40_[+3(3.10e-05)]_12_[+8(6.64e-06)]_\
+    2
+chrIV_601024_601045_+_YD         7.05e-03  22
+chrIV_205929_206092_-_YD         1.78e-07  18_[+10(9.67e-06)]_16_\
+    [+5(1.10e-06)]_13_[+2(1.01e-05)]_[+2(4.13e-05)]_6_[+7(1.50e-05)]_33_\
+    [+10(1.26e-05)]_26
+chrVII_876814_876882_-_Y         1.14e-03  10_[+2(1.86e-05)]_50
+chrXII_370111_370133_-_Y         2.21e-01  23
+chrXI_142296_142335_-_YK         6.03e-05  26_[+2(3.17e-06)]_5
+chrXIV_352413_352446_+_Y         4.16e-01  34
+chrXI_259335_259443_+_YK         1.02e-01  2_[+4(5.28e-05)]_99
+chrIV_170454_170678_-_YD         3.21e-01  225
+chrXI_327028_327077_-_YK         1.36e-02  50
+chrXIV_434974_435049_+_Y         2.01e-04  40_[+2(1.41e-05)]_27
+chrXIII_879784_879987_-_         1.78e-02  68_[+9(9.00e-05)]_116_\
+    [+2(1.81e-05)]_5
+chrVI_54084_54156_-_YFL0         1.86e-01  73
+chrX_651943_652003_+_YJR         3.64e-02  61
+chrVII_519370_519734_+_Y         9.17e-01  365
+chrI_72068_72131_+_YAL03         7.21e-01  64
+chrVII_482594_482666_-_Y         9.64e-02  73
+chrXII_370046_370085_-_Y         7.01e-02  12_[+3(2.02e-06)]_[+3(2.02e-06)]_\
+    [+3(4.70e-05)]_1
+chrXI_337236_337458_-_YK         3.49e-01  223
+chrXII_369931_369971_-_Y         1.47e-02  29_[+9(9.00e-05)]_6
+chrV_332750_332831_-_YER         6.27e-01  82
+chrVII_89103_89144_+_YGL         1.22e-01  42
+chrXIV_25557_25676_+_YNL         4.29e-01  120
+chrX_292056_292103_-_YJL         5.93e-01  48
+chrVI_54029_54071_-_YFL0         6.40e-01  43
+chrVII_479486_479548_-_Y         1.00e+00  63
+chrVII_89249_89345_+_YGL         3.31e-04  13_[+5(7.10e-07)]_75
+chrXV_823118_823175_-_YO         7.53e-02  58
+chrXV_160537_160614_-_YO         8.00e-02  66_[+8(4.31e-06)]_3
+chrXII_815479_815524_+_Y         1.04e-02  17_[+2(1.81e-05)]_20
+chrXI_380835_380895_-_YK         2.09e-01  61
+chrXII_709431_709491_-_Y         1.16e-01  38_[+9(9.00e-05)]_17
+chrIII_57430_57531_-_YCL         3.64e-03  72_[+1(6.73e-06)]_21
+chrXIII_291830_291903_+_         2.02e-02  74
+chrV_333160_333203_-_YER         6.56e-02  44
+chrIV_721207_721281_-_YD         1.70e-02  23_[+1(3.54e-05)]_43
+chrXI_336885_336918_-_YK         1.86e-02  34
+chrVIII_386134_386221_+_         6.53e-01  88
+chrXI_552213_552259_+_YK         7.96e-02  23_[+8(1.02e-05)]_15
+chrXIII_879678_879718_-_         1.70e-01  41
+chrX_120653_120750_+_YJL         1.42e-03  27_[+2(7.24e-07)]_62
+chrXII_232773_232819_-_Y         4.43e-05  17_[+3(3.64e-06)]_21
+chrI_71966_72005_+_YAL03         4.32e-03  6_[+4(7.45e-05)]_26
+chrXII_499131_499177_+_Y         4.43e-04  38_[+2(2.56e-07)]
+chrXV_253155_253210_-_YO         1.69e-01  56
+chrIX_128567_128627_+_YI         5.49e-03  61
+chrVII_88287_88375_+_YGL         1.18e-04  19_[+10(9.67e-06)]_45_\
+    [+4(6.54e-06)]_9
+chrIX_128421_128488_+_YI         3.18e-03  46_[+3(5.89e-05)]_13
+chrXIV_27078_27117_+_YNL         3.65e-02  28_[+3(4.99e-06)]_3
+chrXII_806637_806693_+_Y         5.79e-05  32_[+10(3.49e-05)]_17
+chrXI_337505_337597_-_YK         8.82e-01  8_[+1(5.78e-05)]_[+1(5.78e-05)]_\
+    [+1(5.78e-05)]_[+1(5.78e-05)]_[+1(5.78e-05)]_[+1(5.78e-05)]_9_\
+    [+1(5.78e-05)]_13
+chrVII_1049847_1049888_-         3.27e-02  42
+chrXII_556266_556381_+_Y         9.42e-01  116
+chrXIII_360812_360853_-_         8.66e-01  42
+chrVII_1049564_1049737_-         7.33e-02  56_[+3(7.40e-05)]_18_[+3(5.89e-05)]_\
+    82
+chrX_120557_120647_+_YJL         9.57e-03  [+2(1.11e-06)]_82
+chrIX_128500_128539_+_YI         9.35e-01  40
+chrXI_259224_259248_+_YK         4.07e-01  25
+chrVII_876999_877145_-_Y         1.56e-01  18_[+7(4.23e-05)]_120
+chrXIII_220125_220165_+_         4.95e-01  41
+chrVII_379190_379241_+_Y         1.39e-02  21_[+3(1.59e-05)]_22
+chrIV_1489753_1489789_-_         3.47e-02  7_[+3(6.62e-06)]_3_[+3(5.89e-05)]_\
+    [+3(8.25e-06)]
+chrX_291690_291776_-_YJL         2.63e-01  87
+chrXI_337599_337658_-_YK         2.41e-01  60
+chrXV_679977_680012_+_YO         5.08e-01  36
+--------------------------------------------------------------------------------
+
+********************************************************************************
+
+
+********************************************************************************
+Stopped because requested number of motifs (10) found.
+********************************************************************************
+
+CPU: bifx-core3.bio.ed.ac.uk
+
+********************************************************************************
