@@ -4,7 +4,7 @@ This directory contains selected output of the nf_CRACpipeline running on the Kh
 
 ## aligned_bamqc
 
-File containing the BamQC analysis result that shows the quality of genome alignment in the sam file format.
+File containing the BamQC analysis result that shows the quality of read alignments.
 
 ## aligned_bamsorted
 
