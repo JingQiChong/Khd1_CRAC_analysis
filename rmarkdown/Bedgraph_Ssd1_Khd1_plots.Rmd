@@ -199,8 +199,7 @@ bgall <-  bind_rows(
 ```{r load_gff}
 ### This does not run because input_annotation is not committed
 gff_Sc <- 
-  here::here("Khd1_SRR847751",
-             "input_annotation",
+  here::here("input_annotation",
              "gff_ncRNAs_abundantverifiedmRNAparts.gff") %>%
   read_gff() %>%
   mutate(ID = str_extract(attr,"ID=[A-Za-z0-9-_]+") %>%
