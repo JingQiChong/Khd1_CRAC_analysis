@@ -27,6 +27,7 @@ library(tidyverse)
 library(ggplot2)
 library(cowplot)
 library(valr) # for read_bedgraph
+library(here)
 theme_set(theme_cowplot(font_size = 11) + 
               theme(strip.background = element_blank(),
                     strip.text.y = element_text(angle=0)))
@@ -160,39 +161,48 @@ plot_mRNAbg <- function(bgbig,gff,gene,strandrev=FALSE,pad=100,ptitle=NULL,gff_e
 ### Load bedgraphs
 
 ```{r load_bedgraph}
-bedgraph_dir <- "~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/bedgraph_genomecov/"
-bgKhd1 <- bind_rows(
-    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
-        mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
-    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_minus.bedgraph")) %>%
-        mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1)
+bedgraph_dir <- here::here("Khd1_SRR847751",
+                           "bedgraph_genomecov")
+
+### Renamed this to bgall just to simplify file loading using here package
+# bgKhd1 <- 
+bgall <-  bind_rows(
+  here::here("Khd1_SRR847751",
+             "bedgraph_genomecov",
+             "SRR847751_trimmed_plus.bedgraph") %>%
+    read_bedgraph() %>%
+    mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
+  here::here("Khd1_SRR847751",
+             "bedgraph_genomecov",
+             "SRR847751_trimmed_minus.bedgraph") %>%
+    read_bedgraph() %>%
+    mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1)
   
 )
 
-bgSsd1 <- bind_rows(
-  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
-           mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
-  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
-           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
-)
-
-bgall <- bind_rows(
-    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
-        mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
-    read_bedgraph(paste0(bedgraph_dir,"SRR847751_trimmed_minus.bedgraph")) %>%
-        mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1),
-    read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
-           mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
-  read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
-           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
-)
+### Commented this out to troubleshoot file loading
+# bgall <- bind_rows(
+#     read_bedgraph(paste(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
+#         mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
+#     read_bedgraph(paste(bedgraph_dir,"SRR847751_trimmed_minus.bedgraph")) %>%
+#         mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1),
+#     read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
+#            mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
+#     read_bedgraph("~/CRAC_analysis_2022/ssd1/bedgraph_genomecov/20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
+#           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
+# )
 
 ```
 
 ### Load genome feature file
 
 ```{r load_gff}
-gff_Sc <- read_gff("~/CRAC_analysis_2022/Khd1_CRAC_analysis/input_annotation/gff_ncRNAs_abundantverifiedmRNAparts.gff") %>%
+### This does not run because input_annotation is not committed
+gff_Sc <- 
+  here::here("Khd1_SRR847751",
+             "input_annotation",
+             "gff_ncRNAs_abundantverifiedmRNAparts.gff") %>%
+  read_gff() %>%
   mutate(ID = str_extract(attr,"ID=[A-Za-z0-9-_]+") %>%
            str_remove("ID="), 
          Parent = str_extract(attr,"Parent=[A-Za-z0-9-_]+")%>%
