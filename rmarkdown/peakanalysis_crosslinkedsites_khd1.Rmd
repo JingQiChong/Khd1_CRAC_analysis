@@ -19,6 +19,7 @@ library(stringr)
 library(rtracklayer)
 library(intervals)
 library(ggplot2)
+library(here)
 ```
 
 ##function for loading the data 
@@ -36,7 +37,10 @@ read_pileuptxt <- function(file) {
 ```
 ## Load pileup of khd1_SRR847751 for analysis
 ```{r load_data }
-Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt")
+Khd1_SRR847751_df <- here::here("Khd1_SRR847751",
+                                "pyPileup_analyses",
+                                "SRR847751_trimmed_pileups.txt") %>%
+                     read_pileuptxt()
 
 ```
 ## Selecting the cross-linked peaks

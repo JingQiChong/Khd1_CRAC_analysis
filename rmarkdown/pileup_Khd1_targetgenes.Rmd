@@ -13,6 +13,7 @@ This script relies on Ssd1-bound peak data in .gtf (gff-like) format produced by
 knitr::opts_chunk$set(echo=TRUE)
 library(tidyverse)
 library(magrittr)
+library(here)
 
 read_FDR_gff <- function(file){
     # tidyverse read gff function from rmonad vignette
@@ -50,7 +51,10 @@ read_FDR_gff <- function(file){
 
 ```{r load_gffs}
 # setwd("~/Repos/Ssd1_CRACanalysis_2020/rmarkdown")
-SRR847751_df <- read_FDR_gff("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyCalculateFDRs_analyses/SRR847751_trimmed_output_FDRs.gtf")
+SRR847751_df <- read_FDR_gff(here::here("Khd1_SRR847751", 
+                                        "pyCalculateFDRs_analyses", 
+                                        "SRR847751_trimmed_output_FDRs.gtf")
+)
 ```
 ## Filter peak_height_sort
 ```{r sort_descending, dependson="load_gffs"}

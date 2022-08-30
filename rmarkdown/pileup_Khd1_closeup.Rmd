@@ -20,6 +20,7 @@ library(dplyr)
 library(forcats)
 library(stringr)
 library(cowplot)
+library(here)
 theme_set(theme_cowplot(font_size = 11) + 
               theme(strip.background = element_blank()) 
           )
@@ -143,7 +144,7 @@ annotate_CS <- function(mid, ...) {
 
 ## Load khd1_SRR847751 sample for analysis
 ```{r load_data}
-Khd1_SRR847751_df <- read_pileuptxt("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/SRR847751_trimmed_pileups.txt",converturidine = TRUE)
+Khd1_SRR847751_df <- read_pileuptxt(here::here("Khd1_SRR847751", "pyPileup_analyses", "SRR847751_trimmed_pileups.txt"),converturidine = TRUE)
 Khd1_SRR847751_filtered_4_df <- Khd1_SRR847751_df %>%
   mutate(percent_del = (deletions / hits) * 100) %>%
   filter( hits > 100, percent_del >= 4)

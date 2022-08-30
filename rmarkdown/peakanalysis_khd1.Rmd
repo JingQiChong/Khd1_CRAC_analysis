@@ -16,11 +16,12 @@ library(tidyverse)
 library(magrittr)
 library(cowplot)
 theme_set(theme_cowplot(font_size=11))
-
 library(rtracklayer)
 library(Biostrings)
+library(here)
 
-data_output_dir <- "./Khd1_SRR847751/MEME/"
+#data_output_dir <- here::here("Khd1_SRR847751",
+                              "MEME")
 
 read_FDR_gff <- function(file){
     # tidyverse read gff function from rmonad vignette
@@ -64,7 +65,11 @@ print_gff_nice <- function(gff_df) {
 # Load gtfs
 
 ```{r load_gffs}
-SRR847751_df <- read_FDR_gff("~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyCalculateFDRs_analyses/SRR847751_trimmed_output_FDRs.gtf")
+SRR847751_df <- read_FDR_gff(here::here("Khd1_SRR847751",
+                           "pyCalculateFDRs_analyses",
+                           "SRR847751_trimmed_output_FDRs.gtf") 
+)
+                
 
 ```
 
@@ -122,7 +127,9 @@ SRR847751_df_desc500 <- SRR847751_df %>%
 
 
 ```{r find_seqs_setup}
-S288C_FaF <- Rsamtools::FaFile("~/Khd1_CRAC_analysis/input_annotation/Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa")
+S288C_FaF <- Rsamtools::FaFile(here::here("input_annotation", 
+                                          "Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa")
+                             )
 Rsamtools::indexFa(S288C_FaF)
 
 getSeq_gffdf <- function(gff_df,faf=S288C_FaF) {
@@ -146,8 +153,10 @@ select_seqs_above_minwidth <- function(StringSet,minwidth=10) {
 ```{r write_desc500_minwidth8_peakseqs}
 SRR847751_desc500_minwidth8_peakseqs <- getSeq_gffdf(SRR847751_df_desc500) %>%
     select_seqs_above_minwidth(minwidth=8) %T>% 
-    writeXStringSet(paste0(data_output_dir,
-                           "/Khd1_SRR847751_peaks_FDR_p0_01_desc500_minwidth_8.fa")
+    writeXStringSet(
+                    here::here("Khd1_SRR847751",
+                               "MEME",
+                               "Khd1_SRR847751_peaks_FDR_p0_01_desc500_minwidth_8.fa")
                    )
 ```
 
@@ -158,8 +167,10 @@ SRR847751_desc100_minwidth20_peakseqs <- SRR847751_df_desc500 %>%
     head(n=100) %>%
     getSeq_gffdf() %>%
     select_seqs_above_minwidth(minwidth=20) %T>% 
-    writeXStringSet(paste0(data_output_dir,
-                           "/Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa")
+    writeXStringSet(
+                    here::here("Khd1_SRR847751",
+                               "MEME",
+                               "/Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa")
                     )
 ```
 
@@ -178,9 +189,13 @@ run_MEME <- function(fafile, outputdir, nmotifs = 10, minw = 5, maxw = 8,dry_run
     }
     cmd_meme
 }
-run_MEME(paste0(data_output_dir,
-                           "Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa"),
-         paste0(data_output_dir,"Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20_MEME"),
+run_MEME(
+        here::here("Khd1_SRR847751",
+                   "MEME",
+                   "Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20.fa"),
+        here::here("Khd1_SRR847751",
+                   "MEME",
+                   "Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20_MEME"),
          dry_run = FALSE)
 
 ```
