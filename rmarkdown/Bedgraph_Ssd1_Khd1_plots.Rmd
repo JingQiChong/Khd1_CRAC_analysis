@@ -31,6 +31,8 @@ library(here)
 theme_set(theme_cowplot(font_size = 11) + 
               theme(strip.background = element_blank(),
                     strip.text.y = element_text(angle=0)))
+
+# setwd("~/CRAC_analysis_2020/khd1/khd1_SRR847751/rmarkdown/")
 ```
 
 ```{r plot_functions}
@@ -157,7 +159,13 @@ plot_mRNAbg <- function(bgbig,gff,gene,strandrev=FALSE,pad=100,ptitle=NULL,gff_e
 
 
 ### Load bedgraphs
-```{r load_bedgraph} 
+
+```{r load_bedgraph}
+bedgraph_dir <- here::here("Khd1_SRR847751",
+                           "bedgraph_genomecov")
+
+### Renamed this to bgall just to simplify file loading using here package
+# bgKhd1 <- 
 bgall <-  bind_rows(
   here::here("Khd1_SRR847751",
              "bedgraph_genomecov",
@@ -168,22 +176,11 @@ bgall <-  bind_rows(
              "bedgraph_genomecov",
              "SRR847751_trimmed_minus.bedgraph") %>%
     read_bedgraph() %>%
-    mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1),
-  file.path("~","Ssd1_CRACanalysis_2020",
-             "Ssd1_CRAC_demult_dedup_20190114_all", 
-             "bedgraph_genomecov", 
-             "20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_plus.bedgraph") %>%
-    read_bedgraph() %>%
-    mutate(Type="",Sample= "Ssd1",strand="plus",strandm=1),
-  file.path("~","Ssd1_CRACanalysis_2020",
-             "Ssd1_CRAC_demult_dedup_20190114_all", 
-             "bedgraph_genomecov", 
-             "20190114_Ssd1_CRAC_trimmed_NNNGTGAGC_SSD1_3_30_minus.bedgraph") %>%
-    read_bedgraph() %>%
-    mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
+    mutate(Type="",Sample= "Khd1",strand="minus",strandm=-1)
+  
 )
-```
 
+### Commented this out to troubleshoot file loading
 # bgall <- bind_rows(
 #     read_bedgraph(paste(bedgraph_dir,"SRR847751_trimmed_plus.bedgraph")) %>%
 #         mutate(Type="",Sample= "Khd1",strand="plus",strandm=1),
@@ -195,10 +192,12 @@ bgall <-  bind_rows(
 #           mutate(Type="",Sample= "Ssd1",strand="minus",strandm=-1)
 # )
 
+```
 
 ### Load genome feature file
 
 ```{r load_gff}
+### This does not run because input_annotation is not committed
 gff_Sc <- 
   here::here("input_annotation",
              "gff_ncRNAs_abundantverifiedmRNAparts.gff") %>%
