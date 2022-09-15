@@ -4,7 +4,8 @@ author: "Jing Qi Chong"
 date: "9th Apr 2022"
 output: html_document
 ---
-#Summary
+# Summary
+
 This analysis searches for motifs associated with Khd1-bound RNA from the CRAC datasets using the MEME software.
 This script relies on Khd1-bound peak data in gtf format file produced by `pyCalculateFDRs.py` software in the nf_CRACpipeline and the genome sequence in fasta format (Saccharomyces_cerevisiae.EF4.74.dna.toplevel.shortChrNames.fa) as input.
 
@@ -19,9 +20,6 @@ theme_set(theme_cowplot(font_size=11))
 library(rtracklayer)
 library(Biostrings)
 library(here)
-
-#data_output_dir <- here::here("Khd1_SRR847751",
-                              "MEME")
 
 read_FDR_gff <- function(file){
     # tidyverse read gff function from rmonad vignette
@@ -176,7 +174,7 @@ SRR847751_desc100_minwidth20_peakseqs <- SRR847751_df_desc500 %>%
 
 ## MEME motif search
 
-Runs MEME motif search on top 100 peaks. We ran this with MEME 5.1.1
+Runs MEME motif search on top 100 peaks. We ran this with MEME 5.4.1
 
 ```{r run_MEME, dependson="write_desc100_minwidth20_peakseqs"}
 run_MEME <- function(fafile, outputdir, nmotifs = 10, minw = 5, maxw = 8,dry_run = FALSE) {
@@ -196,7 +194,7 @@ run_MEME(
         here::here("Khd1_SRR847751",
                    "MEME",
                    "Khd1_SRR847751_peaks_FDR_p0_01_desc100_minwidth20_MEME"),
-         dry_run = FALSE)
+         dry_run = TRUE)
 
 ```
 

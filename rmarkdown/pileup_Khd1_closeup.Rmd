@@ -7,7 +7,7 @@ output: html_document
 ## Summary
 Generates pileup plot for Khd1 CRAC data on specific regions of specific Khd1 target genes that are specified in `~/CRAC_analysis_2022/input_annotation/Khd1_TargetGeneNamesOnly.txt`. These show detailed profiles of read counts, including nucleotide-specific mutations and deletions, along selected transcripts.
 
-This script relies on "pileup" files in tab-separated text format produced by `pyPileup` script while running the pipeline, put in the directory `~/CRAC_analysis_2022/khd1/khd1_SRR847751/pyPileup_analyses/`. So it must be run after the nf_CRACpipeline, read the repository `README.md` for details.
+This script relies on "pileup" files in tab-separated text format produced by `pyPileup` script while running the pipeline, put in the directory `~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/`. So it must be run after the nf_CRACpipeline, read the repository `README.md` for details.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache= TRUE,
@@ -150,12 +150,12 @@ Khd1_SRR847751_filtered_4_df <- Khd1_SRR847751_df %>%
   filter( hits > 100, percent_del >= 4)
 ```
 
-##Generate table containing the genes exceeding the threshold
+## Generate table containing the genes exceeding the threshold
 ```{r generate table}
 Khd1_targetted_genes <- data.frame((unique(sort(Khd1_SRR847751_filtered_4_df$target))))
 ```
 
-##ASH1
+## ASH1
 ## Plot pileup along ASH1 transcript as a line
 ```{r plot_ASH1line,dependson = c("pileup_functions","load_data"),fig.height = 2,fig.width=4}
 plot_pileuphits_line(filter(Khd1_SRR847751_df, target == "ASH1") )
@@ -228,7 +228,7 @@ ASH1_widerep_plot <-
   theme(plot.margin = margin(t=10,b = 25)) 
   #  annotate_CNN(filter(CNN_positions_bytx,target=="ASH1")$mid) 
 
-#SRL1
+# SRL1
 SRL1_widerep_df <- filter(Khd1_SRR847751_df, 
                          target == "SRL1",
                          position >= 550, 
@@ -241,7 +241,7 @@ SRL1_widerep_plot <-
   theme(plot.margin = margin(t=25, b= 25))
   #  annotate_CNN(filter(CNN_positions_bytx,target=="SRL1")$mid) 
 
-#CCW12 MOTIF 1
+# CCW12 MOTIF 1
 CCW12_1_widerep_df <- filter(Khd1_SRR847751_df, 
                          target == "CCW12",
                          position >= 210, 
@@ -254,7 +254,7 @@ CCW12_1_widerep_plot <-
   theme(plot.margin = margin(t= 25, b= 25))
   #  annotate_CNN(filter(CNN_positions_bytx,target=="CCW12")$mid) 
 
-#CCW12 MOTIF 2
+# CCW12 MOTIF 2
 CCW12_2_widerep_df <- filter(Khd1_SRR847751_df, 
                          target == "CCW12",
                          position >= 400, 
@@ -267,6 +267,7 @@ CCW12_2_widerep_plot <-
   theme(plot.margin = margin(t= 25))
   #  annotate_CNN(filter(CNN_positions_bytx,target=="CCW12")$mid) 
 
+# Plot pileup plot for all genes
 pileup_plot_allgenes <- 
   plot_grid(ASH1_widerep_plot,SRL1_widerep_plot,CCW12_1_widerep_plot,CCW12_2_widerep_plot, ncol = 1) 
 

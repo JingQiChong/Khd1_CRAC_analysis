@@ -6,8 +6,8 @@ output: html_document
 ---
 
 ## Summary
-Generate a text file (`~/CRAC_analysis_2022/input_annotation/Khd1_TargetGeneNamesOnly.txt`) containing the list of potential genes that might be regulated by Khd1 
-This script relies on Ssd1-bound peak data in .gtf (gff-like) format produced by `pyCalculateFDRs.py` script while running the nf_CRAC pipeline. The outputs .gtf files are stored at the directory `~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyCalculateFDRs_analyses/`. Only genes with peak height > 100 and FDR=0 are selected and put into the list.  
+Generate a text file (`~/CRAC_analysis_2022/input_annotation/Khd1_TargetGeneNamesOnly.txt`) containing the list of potential genes that might be regulated by Khd1. 
+This script relies on Khd1-bound peak data in .gtf (gff-like) format produced by `pyCalculateFDRs.py` script while running the nf_CRAC pipeline. The outputs .gtf files are stored at the directory `~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyCalculateFDRs_analyses/`. Only genes with peak height > 100 and FDR=0 are selected and put into the list.  
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo=TRUE)
@@ -50,22 +50,19 @@ read_FDR_gff <- function(file){
 ## Load gtfs
 
 ```{r load_gffs}
-# setwd("~/Repos/Ssd1_CRACanalysis_2020/rmarkdown")
 SRR847751_df <- read_FDR_gff(here::here("Khd1_SRR847751", 
                                         "pyCalculateFDRs_analyses", 
                                         "SRR847751_trimmed_output_FDRs.gtf")
 )
 ```
-## Filter peak_height_sort
+## Sort by peak_height descending
 ```{r sort_descending, dependson="load_gffs"}
-
-#sort by peak_height descending
 SRR847751_df_desc <- filter(SRR847751_df, peak_height > 100) %>%
     arrange(desc(peak_height))
 
 ```
 
-##Make list containg the genes in alphabetical order
+## Make list containg the genes in alphabetical order
 ```{r sort_genename, dependson="Filter_peak_height_sort"}
 Potential_Khd1_targetted_genes <- (unique(sort(SRR847751_df_desc$Gene)))
 Potential_Khd1_targetted_genes_df <- data.frame(Potential_Khd1_targetted_genes)
