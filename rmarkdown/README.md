@@ -1,4 +1,5 @@
 # rmarkdown
+This directory contain rmarkdown script for Khd1 CRAC analysis. These are run after the nf_CRACpipeline has completed.
 
 ## peakanalysis_khd1.Rmd 
 This script searches for motifs associated with Khd1-bound RNA from the CRAC datasets
