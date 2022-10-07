@@ -5,7 +5,7 @@ output: html_document
 ---
 
 ## Summary
-Generates pileup plot for Khd1 CRAC data on specific regions of specific Khd1 target genes that are specified in `~/CRAC_analysis_2022/input_annotation/Khd1_TargetGeneNamesOnly.txt`. These show detailed profiles of read counts, including nucleotide-specific mutations and deletions, along selected transcripts.
+Generates pileup plot for Khd1 CRAC data on specific regions of specific Khd1 target genes that are specified in `~/CRAC_analysis_2022/Khd1_CRAC_analysis/input_annotation/Khd1_TargetGeneNamesOnly.txt`. These show detailed profiles of read counts, including nucleotide-specific mutations and deletions, along selected transcripts.
 
 This script relies on "pileup" files in tab-separated text format produced by `pyPileup` script while running the pipeline, put in the directory `~/CRAC_analysis_2022/Khd1_CRAC_analysis/Khd1_SRR847751/pyPileup_analyses/`. So it must be run after the nf_CRACpipeline, read the repository `README.md` for details.
 
@@ -172,7 +172,8 @@ ASH1wide_plot <- plot_pileup_one(ASH1wide_df, include = "allsubdel") +
     labs(title = "ASH1 , pileup plot") 
     #annotate_CS(filter(Khd1_SRR847751_filtered_5_df,target=="ASH1")$position)
 ASH1wide_plot
-##ggsave(plot = ASH1wide_plot, filename = "../Khd1_SRR847751/figure_pileup/ASH1_CS_plot.pdf",
+#ggsave(plot = ASH1wide_plot,
+#       filename = here::here("Khd1_SRR847751", "figure", "ASH1_CS_plot.pdf"),
 #       height = 3, width=6, device = "pdf")
 ```
 
@@ -190,8 +191,9 @@ ASH1seq_plot <- plot_pileup_one(ASH1seq_df,
     labs(title = "ASH1 pileup plot")
 ASH1seq_plot
 
-#ggsave(plot = ASH1seq_plot, filename = "../Khd1_SRR847751/figure/ASH1_seqplot.png",
- #      height = 3, width=10, device = "png")
+#ggsave(plot = ASH1seq_plot,
+#       filename = here::here( "Khd1_SRR847751", "figure", "ASH1_seqplot.png"),
+#       height = 3, width=10, device = "png")
 ```  
 
 ## Find CNN motif positions separately for each transcript
@@ -213,8 +215,8 @@ CNN_positions_bytx
 
 ```
 
-##Plot pileup near Khd1 cross-linked sites
-```{r plot_ASH1_reproducibility}
+## Plot pileup near Khd1 cross-linked sites
+```{r plot_all_reproducibility}
 #ASH1
 ASH1_widerep_df <- filter(Khd1_SRR847751_df, 
                          target == "ASH1",
@@ -275,7 +277,7 @@ pileup_plot_allgenes <-
 pileup_plot_allgenes
 
 #ggsave(plot = pileup_plot_allgenes, 
- #       filename = "../Khd1_SRR847751/figure_pileup/Composite_CS_CNN_pileupplot.png",
+ #       filename = here::here("Khd1_SRR847751","figure_pileup","Composite_CS_CNN_pileupplot.png"),
   #      height = 8, width = 9, device = "png")
 
 ```

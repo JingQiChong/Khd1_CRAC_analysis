@@ -202,7 +202,7 @@ gff_Sc <-
 ```
 
 
-### plot target genes
+## plot target genes
 
 ASH1, SUN4, HSP150, CCW12, SRL1, SUC2
 
@@ -231,8 +231,9 @@ SUC2_bgall <-
 plot_alltranscripts <- plot_grid(ASH1_bgall,SUN4_bgall,HSP150_bgall,CCW12_bgall, SRL1_bgall, SUC2_bgall, ncol =2,align = "v")
 
 plot_alltranscripts
-#ggsave("../Khd1_SRR847751/figure/Khd1_Ssd1_targets_facet_bedgraph.png",plot_alltranscripts,
- #      height=10,width=12)
+#ggsave(here::here("Khd1_SRR847751","figure", "Khd1_Ssd1_targets_facet_bedgraph.png"),
+#       plot_alltranscripts,
+#       height=10,width=12)
 
 ```
 
