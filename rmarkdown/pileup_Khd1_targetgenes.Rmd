@@ -66,6 +66,8 @@ SRR847751_df_desc <- filter(SRR847751_df, peak_height > 100) %>%
 ```{r sort_genename, dependson="Filter_peak_height_sort"}
 Potential_Khd1_targetted_genes <- (unique(sort(SRR847751_df_desc$Gene)))
 Potential_Khd1_targetted_genes_df <- data.frame(Potential_Khd1_targetted_genes)
-write_delim(Potential_Khd1_targetted_genes_df, file = "~/CRAC_analysis_2022/Khd1_CRAC_analysis/input_annotation/Khd1_TargetGeneNamesOnly.txt", quote = "none", col_names = FALSE)
+write_delim(Potential_Khd1_targetted_genes_df, 
+            file = here::here("input_annotation", "Khd1_TargetGeneNamesOnly.txt"),
+            quote = "none", col_names = FALSE)
 
 ```
